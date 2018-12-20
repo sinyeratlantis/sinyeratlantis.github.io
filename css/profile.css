@@ -4,7 +4,11 @@
 *{margin: 0px;padding: 0px;}
 
 
-body{background-color: snow;font-family: sans-serif;line-height:24px;}
+body{
+	background-color: snow;
+	font-family: sans-serif;
+	line-height:24px;
+	min-width:1280px;}
 
 /* ————————navbar—————————— */
 
