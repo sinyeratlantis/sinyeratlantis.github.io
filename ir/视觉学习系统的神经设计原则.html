@@ -1,0 +1,525 @@
+<!doctype html>
+<html style='font-size:22px !important'>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>视觉学习系统的神经设计原则</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) { 
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.701961); color: rgb(85, 85, 85); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right-width: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit inherit; background-repeat: inherit inherit; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; background-position: 0px 0px; background-repeat: initial initial; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print { 
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid-page; break-before: avoid-page; }
+  #write { margin-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid-page; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; overflow-x: hidden; background-position: initial initial; background-repeat: initial initial; }
+p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) { 
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background-color: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; background-position: initial initial; background-repeat: initial initial; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; }
+a.md-print-anchor { white-space: pre !important; border: none !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; text-shadow: initial !important; background-position: 0px 0px !important; background-repeat: initial initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Open Sans Regular'),url('file:///Users/sinyeratlantis/Library/Application%20Support/abnerworks.Typora/themes/github/400.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Open Sans Italic'),url('file:///Users/sinyeratlantis/Library/Application%20Support/abnerworks.Typora/themes/github/400i.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Open Sans Bold'),url('file:///Users/sinyeratlantis/Library/Application%20Support/abnerworks.Typora/themes/github/700.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: bold;
+    src: local('Open Sans Bold Italic'),url('file:///Users/sinyeratlantis/Library/Application%20Support/abnerworks.Typora/themes/github/700i.woff') format('woff');
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: STKaiti, Times;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    /*background: url("file:///Users/sinyeratlantis/Library/Application%20Support/images/modules/styleguide/para.png") no-repeat 10px center;*/
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+   padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 4px 2px 4px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 0.2em 1em;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+ .typora-export p, .typora-export .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-mac'><h1><a name='header-n0' class='md-header-anchor '></a>视觉学习系统的神经设计原则</h1><p>虽然此文档可能并没有什么价值，但依旧是作者凝聚了不少的心力整理出来的一份文档，希望阅读者尊重作者的意愿，不要将此文档公开或在未经作者允许的情况下传播。有问题请联系<a href='mailto:sinyeratlantis@gmail.com' target='_blank' class='url'>sinyeratlantis@gmail.com</a>。</p><h2><a name='header-n3' class='md-header-anchor '></a>前言</h2><p>人工智能是关于如何实现智能的一门科学，实现机器智能一直是我们的终极目标。近些年来，以深度学习为代表的一系列机器学习算法在各个领域的应用中取得了巨大的成功，但是，不难发现，主流的机器学习算法以监督学习为主，强化学习为重要组成部分，而无监督学习则不那么被重视。众所周知，监督学习需要大量的标注数据，强化学习需要更大量的奖励信号。在深度学习出现之后，大部分算法均通过反传更新参数，这使得我们的算法更像是一种函数近似器，去近似一种函数映射，而与我们所追求的真正的智能相差甚远。因此，机器学习学术界和工业界有很多出身于统计背景的学者，也给整个学界带来一种崇尚数学的风潮，追求数学上对算法的优化和可解释性，并且对研究强人工智能或者说通用人工智能的人怀有偏见，认为这些人没有足够的学术积累和严谨的科学思维，被贬称为民科。</p><p>时间来到近两年，深度学习方法逐渐显露出它的局限性，各类算法层出不穷，然而关键的智能水平上却鲜有突破，此时，工业界相比学术界更加敏感地意识到目前的方法不是长久之计，开始转向神经科学的知识寻求智能算法的启发。DeepMind于2017年7月于Nature子刊发表论文《Neuroscience-Inspired Artificial Intelligence》，阐述了目前人工智能的主流算法在神经科学上的对应理解，并且指出了下一步人工智能的研究方向应是与神经科学的进一步结合。早在2016年12月，DeepMind就于Nature Neuroscience上发表论文《The hippocampus as a predictive map》，由人脑海马区启发设计预测算法。OpenAI于ICML2017上发表论文《Curiosity-driven Exploration by Self-supervised Prediction》，通过预测和好奇心构建更加鲁棒的学习算法，显示了明显的受神经科学启发的倾向。2018年4月，DeepMind于Nature Neuroscience发表论文《Prefrontal cortex as a meta-reinforcement learning system》，借鉴人脑前额叶的生理学特征，模拟多巴胺奖励设计强化学习系统。8月，OpenAI进一步扩展好奇心驱使算法，发表《Large-Scale Study of Curiosity-Driven Learning》。CCN2017大会上，FAIR首席科学家Yann LeCun总结了卷积网络近年的进展，表达了自己对无监督学习的重视以及对反向传播算法的高度质疑，呼吁学界更多地去从神经科学中寻求启发，设计全新的网络架构和算法。虽然CNN是神经科学与人工智能算法设计结合的一大经典，被誉为CNN之父的Yann还是强调了自己是一个计算机科学家，而对神经科学了解甚少。同样是在CCN2017大会上，深度学习大牛Yoshua Bengio也发表了演讲，尝试从人脑的角度去证明反向传播算法在构建智能的可行性，但也只是提供了启发式思想，提出了一些反传算法与人脑的部分相似性，关键的部分依旧是避而不谈。</p><p>以上种种迹象均表明研究人工智能的学者们开始更多地寻求神经科学的帮助。然而，这些人绝大部分出身于数学和计算机系，对神经科学了解甚少，大部分算法设计的尝试更多的是从一些浅显的心理学常识出发，从数学的角度出发设计与脑神经系统更加相似的算法，却并未真正参考脑的组织设计。不少人依旧沉浸在数学优化方法的局部最优点里，所有的尝试都是小修小补，虽然是对构建智能的尝试，不再是提升数据分析的精度，但这些尝试并未去理解智能的本源：脑。所以，我个人的看法是目前计算机界有能力做出真正智能系统的人少之又少。</p><p>从脑科学的角度构建智能并不是一个完全无人研究的领域，在神经科学界，这种方法被称为计算神经科学，其原始目的是为了通过对脑的建模指导神经生物学实验设计，更好地理解脑。在人工智能火热的当下，不少神经科学学者也尝试以神经科学为指导，设计人工智能系统。但由于多数人没有计算机背景，拥有这样想法的人并不太多，加上计算神经科学本身又是一个极为冷门的领域，有相关行业者表示国内正经做计算神经科学的学者不超过10人，在神经科学界有能力构建智能系统的人依旧是十分稀少。</p><p>结合这些情况，我们可以发现，通过脑科学的指导构建智能系统的可行性并不明确，很少人进行这方面研究的原因并不是因为这个途径绝对不可能做出来，而是相关领域的人本身就太少。从事计算机行业的人本身就不屑于接触低薪且发展缓慢的生物学界，而生物学界的人，又没有计算机行业的人扎实的数学功底和计算机背景，而且不得不承认的是，在脑太过复杂、对脑的研究本身就不够透彻的前提下，相比扎扎实实就能做出成果的计算机科学，计算神经科学的可行性本身就很不明确，加之需求少，薪水低，这个领域自然就乏人研究。在我个人感觉智能前行的方向是神经科学的前提下，开展计算神经科学对智能系统构建的研究，或许是一个很好的机会。</p><p>当然，机会必然伴随着挑战。在我看来，通过脑科学的指导搭建智能系统对我们而言有几个困难：</p><ul><li>对神经科学的了解不够透彻，因为非生物学背景，获取知识的效率也会比较低</li><li>信息的输入流如何构建，输入形式是什么，我们应期望得到何种输出呢</li><li>脑组织太过复杂，无法用可行的模型进行建模</li><li>即便清楚了脑组织，因为脑高度并行的设计，是否会遇上复杂度瓶颈</li><li>即便完成了建模，考虑到人体与计算机本质上的不同，模型是否真正有效，需要的学习时间是否可以接受</li></ul><p>目前而言，我们的规划是先构建一个能够记忆、预测时序模式的神经网络模型，期望输入视频流能够选择性地激活部分高层神经元，并且由这些高层神经元的激活反馈连接传播的信号激活记忆实现对未来的预测。这里面有几个关键点：</p><ul><li>视网膜的建模：我们需要了解中枢神经系统的输入是什么，以及其输出的具体数量级</li><li>中枢视觉皮层的建模：简单的边缘、色彩、纹理信息如何最终形成模式</li><li>记忆的形成：模式如何被记录和唤醒</li><li>欲望、预测和决策的建模：如何实现起源模块对输入的反馈，以及通过这个奖惩信号如何指导注意和决策</li></ul><p>现阶段我们已经有了一些成果，第一阶段我们希望能够依据人体视觉系统的实现形式实现对MNIST的无监督分类，具体细节涉及到许多神经科学的生理学细节，详见下面的内容。</p><p>本文档主要参考于以下书籍：</p><ul><li>生理学（神经科学部分），第六版</li><li>神经生物学：从神经元到脑，第五版</li><li>视觉神经生理学</li><li>Neuroscience: Exploring the Brain, 4th Edition</li><li>Computational Maps in the Visual Cortex</li><li>Principles of Neural Design</li></ul><h2><a name='header-n46' class='md-header-anchor '></a>1. 视网膜阶段的传导输出</h2><p>视网膜共有600万到700万视锥细胞，通过水平细胞、双极细胞、无长突细胞整合为120万神经节细胞，作为视神经输出的全部信号。假设人眼每秒能识别20张图片，则神经元每张图片能发放的动作电位数为50次，即强度表征可为50级。</p><p>人眼中央凹为高分辨率区，人对图像的主要分析也来源于此。中央凹处可认为单个视锥连接单个双极连接单个神经节细胞，光感受器（视锥细胞）按光刺激产生分级电位，在此阶段，水平细胞接受多个视锥输入，产生负反馈的分级电位，抑制视锥激活，因此，双极细胞感受野实为中央-周围拮抗结构。无长突细胞在视觉系统中扮演了调节神经节感受野、协调放电和预测编码等角色，作为运动信息编码中的主要考虑因素。黄斑直径为1.5mm，视锥集中区直径为1mm，中央凹直径为0.5mm，中央凹视锥细胞密度为15万个/mm^2。由此估计人眼中央高分辨率区域的视锥数为13万左右，单独连接神经节细胞。视锥直径为4微米左右，中央凹处直径为1至1.5微米，即中央凹处存在三到四个视锥分辨同一像素的情况。</p><p>视网膜大小为1000mm^2，视锥集中区仅4mm^2，意味着人眼视野中仅250分之一的区域能被高分辨，也就是占比十分之一的神经节细胞输出了仅250分之一区域的信息。人眼分辨率为1分，对应4.96微米，由1mm直径的视锥集中区得，中央区约为直径为200像素的圆，于计算机中视为200x200的区域。</p><p>人眼能分辨150种色调，平均10级饱和度（红25级、黄4级），600级的明度，照此计算可得人能够分辨100万种颜色，实际人能分辨的颜色约为几万种。以40级的强度表征考虑，人眼约能分辨6万种颜色，三个视锥细胞输出一个像素点的值，中央区约3万多像素点，则视锥数约为10万多，考虑中央凹外有视锥的合并输入情况，所有数据基本与前述一致。</p><p>神经节细胞的轴突形成视神经传达动作电位至外侧膝状体至初级视皮层V1（6层），进入中枢部分。简单细胞在此阶段部分聚合视觉信息，产生对线条、位置等的初级概念，复杂细胞对位置则不敏感，并且能识别条纹、拐角等。从V1区出发，信息通过两条通路：腹侧通路（从腹部方向向前到颞叶，与感知记忆相关）和背侧通路（从背部方向向上到顶叶，与运动相关）。腹侧通路通过连接逐渐稀疏化兴奋，使其能识别复杂的模式，而背侧通路起源于大细胞层，其对运动敏感的属性在V1V2区仍然保持，直到中颞叶皮层（V5区/MT区）对信息整合，提取了平均运动矢量。</p><h2><a name='header-n52' class='md-header-anchor '></a>2. 视觉信号在丘脑的中继</h2><p>神经节细胞在丘脑内形成12个神经元簇，传递到V1。V1启动视觉感知和行为的处理，信号在皮质上广泛分布，向下传送到许多皮质下结构。神经节细胞终止于外侧膝状核（LGN），每种类型的视觉轴突都有特定的簇，因此，视网膜中的平行通路（快速瞬变，轻快持续，局部边缘，蓝黄色拮抗等）在LGN内保持平行并且在没有会聚的情况下输出。</p><p>V1中各种不同聚合的神经元分别投射到V2。处理在并行流中进行，通过分成低速率和高速率的信道。考虑中央凹处高分辨率细胞，每个视网膜点被相同类型的6个神经节细胞的感受野中心覆盖，这种冗余是不可避免的，丘脑中继神经元重新包装输入的主要原因是减少由中心的重叠引起的冗余。</p><p>到达皮质，中继细胞轴突大大扩展了它们输出的接触数量。标准中继细胞可提供约3000个触点，比其输入的数量多5倍，比视网膜输出的数量多2倍。中继细胞轴突分叉到200多个皮层神经元，每个神经元形成大约6个接触，由大而尖锐的尖峰驱动。</p><p>丘脑对中继某些类型的细胞进行复制，以用于不同的皮质区域作不同的计算目的。例如，快速瞬态信号传递到V1进行线性处理，并独立传递到V2用于非线性处理，考虑所有情况的话其数量扩展大约10倍。对于中继区域来说，这种扩张更重要的是收集信息，因此其尖峰率减半。</p><p>皮质层中的各种神经元向下连接到LGN并且向中继细胞体的远端区域提供许多兴奋性突触。这些皮质输出神经元，树突形态和轴突口径不同，形成不同的类型。每种类型的皮质神经元可能针对特定类型的中继神经元，皮质输出神经元具有更薄和更厚的轴突，分别服务于低速率和高速率的中继类型。</p><h2><a name='header-n58' class='md-header-anchor '></a>3. 初级视皮层V1的信息处理</h2><h3><a name='header-n59' class='md-header-anchor '></a>3.1 V1中的图像处理</h3><p>皮质图像处理的目的是识别、预测和决策有用的模式。模式处理从V1开始，V1是最大的皮层区域，它在猕猴中约占总皮质的13％，猕猴总共约25%的皮质用于视觉。 V1模式编码（空间，运动，颜色，深度）的每个类别均没有用于备份的路径。</p><p>独立的神经元簇在V1中继续保持分离，它们的末端止于不同的层中。用于时间处理的高速神经元终止于第4层上部，用于精细色彩空间处理的中速神经元终止于第4层下部，低速神经元在1-3层中表面终止。第2层和第3层的斑块也接收来自中速中继神经元的输入，编码红绿色彩对比度，这些红绿输入是来自中速中继神经元子集的轴突分支，其完整张量依旧终止于第4层深层。</p><p>人类空间模式解析度约60周/度。具有中心/环绕光谱拮抗作用的神经元子集编码红绿色对比度，该张量解析度仅约40周/度，并在2-3层中分离。</p><p>持续尖峰信号的中继路径具有空间敏锐性，需要在皮质中保留视觉分辨率。因此，V1中的初始池化必须限制在一个维度。实际上，第一阶段皮质神经元将来自单行中继细胞的输入进行整合，因此，它可以解析与原始采样张量相同空间频率的线性图案。</p><h3><a name='header-n64' class='md-header-anchor '></a>3.2 最优编码理论预测的V1电路</h3><p>最优编码理论从观察到的自然场景特性分析，它们的空间和时间相关性产生的功率谱倾向于衰减为频率的平方分之一。这意味着，树木（近距离）和森林（远距离）将显示相同形状的相关分布。鉴于这种统计特性，存在一种表达任何特定场景的最佳方式：将激活集中于特别指定该场景的最少神经元内。</p><p>这种最佳方式，实际上是被称为Gabor滤波器的加权函数，其能够最佳地表示空间位置和空间频率。这两个变量是互逆的，因此空间较大的元素在空间频率上较窄，反之亦然。在两个领域中占据最小可能体积的线性滤波器是Gabor。换句话说，Gabor滤波器在两个相互冲突的需求之间达到最佳平衡：跨空间整合以确定强度变化的极性和规模，并在空间内精确定位以建立位置。</p><p>在自然图像上测试的结果证明Gabor滤波器是最有效的，其长宽比约为2，空间频率带宽约为1-1.5倍频程（octave）。 此外，大约200个类似Gabor的滤波器具有不同的方向、大小和偏移，可以代表由12×12视锥光感受器编码的小片自然场景。 在第一阶段对每个视锥均有大约有40个皮质神经元负责编码（？？），这种过度表示将构成有效的编码。 因此，理论预测：（1）V1中存在一种有效整合感受野的方式 （2）其最佳整合尺度（3）各类滤波器的最佳数量和比例。</p><h3><a name='header-n68' class='md-header-anchor '></a>3.3 简单细胞的信息整合</h3><p>整合来自丘脑中继细胞输入的皮层神经元是著名的简单细胞。它的树突分支在高速高持续的丘脑输入层中，并整合大约30个具有重叠线性排列感受野的中继细胞。这种程度的整合提供最佳的长宽比2：1。而且，正如理论所要求的那样，汇集仅沿着一个维度发生，与该维度正交的空间纹理被保留。至关重要的是，简单的细胞必须不响应单个中继细胞的隔离触发。相反，它应该仅在形成其输入的中继细胞连线一起激活时触发，从而传递场景中的线性特征信息。这要求来自单个中继细胞的连接较弱。因此，每个中继细胞尖峰仅引起简单细胞尖峰的约3％。因此，主视网膜输入导致超过50％的输出峰值传递到丘脑，而丘脑输入到简单细胞则将突触完全性再降低约20倍。（？）</p><p>每个中继细胞为1个简单细胞提供大约6个触点，因此30个中继细胞的线性带提供大约180个触点。为了可靠地激活一个尖峰，简单细胞需要得到同步的接收，在约10毫秒内接收约100个囊泡。因此，每个突触均需以约0.5的概率释放一个囊泡。5-10毫秒内同步激活的视网膜尖峰比单独长时间的尖峰激发1个简单细胞的可能性高4倍。这种设计，使得30个准同步输入尖峰激活1个输出尖峰，将响应稀疏了30倍用于表示边缘。</p><p>为了对理论预测的空间频率范围进行编码，简单细胞将中继细胞的并行频带集成在一起，这些中继细胞具有相同的方向，但是交替连接以进行明暗对比。这扩展了与定向带正交的维度的集成，同时保留了空间分辨率。交替带并排排列。简单细胞表达多达4个明亮区域与各种不同黑暗区域的排列，产生超过30种不同的图案，甚至更多。若是考虑一类罕见的周期性细胞，其最多有6个亮区和7个暗区。因此，很容易想象可产生数百种类型的图案。（这里简单细胞数量的计算尚不明确，C(7, 3)即可达到35种组合，C(9, 4)将多出一个数量级，而C(13, 6)则有1716种组合，尚未理解）</p><p>中继细胞轴突末端需要提供足够的活动突触，以满足与自然场景的最佳平铺所需的所有简单细胞的连接。一个末端提供大约3000个活动突触，并且为每个简单细胞提供大约6个连接，因此，它可以连接大约500个神经元。一些接触保留用于抑制性神经元，构成该层中约10％的细胞。这为数百个不同取向和带宽的简单细胞留下了足够的接触，大致是预测的最佳神经元数量。因此，突触数和细胞数彼此一致，也与图像处理理论的预测一致。</p><h3><a name='header-n73' class='md-header-anchor '></a>3.4 通过Gabor函数的数学建模</h3><p>二维Gabor函数最优地编码空间位置和空间频率，在给定自然图像的统计特性的情况下提取最大互信息。这个被定义为由高斯包络定位的平面波的函数，其等式难以求解。然而，就像视网膜神经节细胞的高斯差分功能一样，这个函数的实际计算十分简化，即通过巧妙平衡兴奋性和抑制性权重来直接计算。中继细胞的高斯差分和简单细胞的Gabor分布之间的关键区别在于周围的尺度。虽然高斯差分拥有环状的感受野，但是Gabor远为更广的边缘仅仅通过整合以高斯差分为建模的中继细胞感受野是无法实现的。一个执行Gabor函数的简单细胞会重新组合原始视锥响应（ON和OFF）的互补半部分。现在，对比通过一系列ON中继细胞激活了简单细胞，同时，它通过抑制（通过中间神经元）OFF中继细胞的空间条带来释放简单细胞的抑制。这种推拉设计，重新组合两者视锥信号的一半，恢复了对比度的全动态响应范围。此外，通过利用兴奋性和抑制性反转电位，电路扩展了对比度的线性响应范围并抑制了噪声。在强调V1的主要计算如何利用Gabor滤波器时，我们忽略了许多复杂性，包括细胞水平的非线性机制和局部皮质电路的各个方面。</p><p>实际上，在Hubel和Wiesel提出定向特异性模型半个世纪之后，我们仍然在研究它究竟是如何发生的问题，以及究竟是什么使得它对亮度和对比度的变化如此稳健。最终答案等待对皮质连接的详细了解。同时，我们考虑了这种设计的一些含义。</p><h3><a name='header-n76' class='md-header-anchor '></a>3.5 稀疏编码的原因</h3><p>稀疏编码的优点是能最佳地表示空间位置和空间频率，线性Gabor滤波器基本上使输入稀疏化。此外，随着眼睛的移动，若超出简单细胞感受野的区域被复杂的图像结构刺激，将激活V1内的各种非线性电路以进一步稀疏简单细胞的响应。因此，简单细胞基本上是静息的，并且响应通常为零，是高度冗余的。此外，由于每个视觉空间都需要许多简单的细胞，而且大多数是静息的，冗余程度似乎开始变得令人担忧，但这对于稀疏编码来说是不可避免的，它可以节省昂贵的动作电位。然而，根据收益递减规律，在许多神经元中表示信息的能量效率更高，这些神经元以非常低的平均速率发射，而以高平均速率发射的少数神经元则效率较低。实际上，存在最佳的稀疏性以使能量效率最大化，这取决于生成和维护神经元的固定成本与发射尖峰的额外信号传导成本之间的比率。对于皮质神经元，尖峰相对昂贵，每秒两次尖峰等于静息成本，这个比率有利于低成本，实际上皮质神经元的运行效率接近最佳效率。因此，在走向感知的道路上，冗余的扩展代表了进步。实际上，除了提高效率之外，稀疏化还有几个目的。稀疏表示有助于特征提取，因为对于激活程度较低的背景，对特征的响应会更为突出。对于重合分离和学习相关性也更容易，因为较少的尖峰产生较少的重合。</p><p>总而言之，自然场景的二阶统计量可以通过具有特定尺寸的单个Gabor滤波器簇来最佳地表示。它们在第4层由简单细胞实例化。Gabor滤波器灵敏度曲线的深波瓣通过推拉设计实现，该设计集成了原始视锥信号的ON和OFF分量。非线性机制进一步稀疏了简单细胞的反应。稀疏化降低了信号传导的代谢成本，但是以空间为代价（皮质神经元比视网膜神经节细胞多100倍）和细胞维持成本，这就是V1如此之大的原因。</p><h3><a name='header-n79' class='md-header-anchor '></a>3.6 简单细胞的自适应</h3><p>V1简单细胞不是静态滤波器。相反，他们不断适应以将他们的编码与上下文相匹配，这提高了他们的效率。对比度增益的快速控制可以匹配对比范围的灵敏度，而不会改变感受野的Gabor形状。增益受视网膜和LGN中复杂机制的控制，但更容易通过抑制性中间神经元在皮质中进行控制。中间神经元编码简单细胞局部活动的加权平均值，并在简单细胞的体细胞上产生抑制性突触，其与树突兴奋性突触的输入相距足够远，使得其不会干扰感受野。在表示局部均值信号的驱动下，抑制性突触降低了简单细胞的输入阻抗，并以恒定比例分流其响应。因此，增益控制执行分裂归一化，按照其局部均值相应缩放简单细胞的输出信号。这种自适应机制与前面提到的感受野调整相结合，因此Gabor感受野之外的细节可以锐化简单细胞的响应并抑制背景活动。</p><p>这些适应形式通过熟悉的方式提高了效率。通过将编码与输入分布进行匹配，对比度增益控制可确保有效地使用简单细胞的信号范围，通过限制高速率，使其保持稀疏性，从而增加每个峰值的信息。通过将细胞调整到超出感受野更宽的场景，它进一步减少了尖峰之间的相关性，从而提高了尖峰效率并增加了稀疏度。但适应不仅仅是将信息集中在尖峰中，它还进一步处理信息。通过实施分裂归一化，对比度增益控制可以提高模式识别能力。在模式识别期间，在较低水平上编码的信息被丢弃在更高水平，因为电路开始建立对象间的关系。分裂归一化会丢弃绝对值并建立相对值。在视网膜中，分裂归一化丢弃了光强水平，有利于编码对比度。在简单细胞中，分裂归一化进一步将对比度替换为相对对比度，这有助于视觉系统的推广。还有另一个需要考虑的增益控制：将视觉注意力引导到视野的一个特定区域的更高阶机制增加了该区域中V1神经元的增益。该执行控制确保用于增强信号的资源仅在需要时使用。</p><h3><a name='header-n82' class='md-header-anchor '></a>3.7 运动的编码</h3><p>局部运动，即场景的二阶时空统计，通过使用编码二阶空间统计的方向选择性Gabor滤波器，在与立体视觉（简单细胞）相同的阶段进行编码，其机制是相似的。要理解时空的Gabor滤波器，请注意以恒定速度移动的图像分量描述了时空中的轨迹。如果空间轴被定义为垂直于感受野的定向轴，并且如果各个亮带和暗带在时空中定向，则细胞可以报告一个图像元素运动的速度和方向。该运动与Gabor滤波器在时空中的方向之间的良好匹配给出了良好的响应。 猫V1和V2中的简单细胞感受野就像这样定向，它们在时空中的条带斜率预测它们对图像元素方向和速度的协调。</p><p>皮质感受野明显地通过滞后和非滞后中继细胞的收敛而在时空中定向。这可以通过成对的中继细胞有效地完成，如果一个滞后并且另一个非滞后（时间正交），其感受野被移位1/2中心直径（空间正交）。因此，如在空间中定向的感受野是由非定向的感受野组合而成，在时空中定向的感受野可以从不在时空中定向的感受野组装得到。一个简单细胞实际上可以同时具有两种属性：空间方向和时空方向。</p><h3><a name='header-n85' class='md-header-anchor '></a>3.8 复杂细胞的简单整合</h3><p>在使用简单细胞初始分割场景之后，V1将计算推广到更广泛的区域，它还必须在对比中进行一般化，以便独立于图像分量是亮还是暗来表示运动的差异和方向。为了实现这一目标，选择相同的方向、空间频率和运动（但在空间上偏移）的简单细胞，会聚到另一类皮质神经元（现在从光感受器开始已有6个神经阶段）。 Hubel和Wiesel认识到这一类细胞并称其为复杂细胞。作为推广器的复杂细胞应该与简单细胞一起，将V1的输出提供给其他区域。</p><h3><a name='header-n87' class='md-header-anchor '></a>3.9 V1对下游的输出</h3><p>V1采用表面输出层（2-3层）和深输出层（5-6层）。深层神经元通过将树突投射到皮质表面选择来自任何层的输入。多种神经元类型可以有效地总结V1需要告诉特定下游目标的任何信息。目标包括（1）上丘（2）LGN（3）通过高速苔藓纤维连接的小脑树突棘簇（4）通过低速攀爬纤维连接的小脑下橄榄簇。这些下游目标在功能上是多样化的，因此每个目标都需要一些不同的信息。例如，负责通过快速眼动选择捕获目标的上丘需要知道目标运动的方向。相应地，第5层输出神经元到上丘是方向选择性的，与用于视觉引导运动的脑小区的桥脑群一样。另一方面，LGN中的神经元簇涉及完全不同的问题集，并且相应地它们从不同输出层（第6层）中的不同神经元类型收集。这些神经元不是方向选择性的，它们是多样的，从不同层次的不同层面收集信息并通过不同口径的轴突传播，每个轴突针对的可能是LGN内的不同群集。</p><p>更上层的输出神经元通过来自中间层的上行轴突收集大部分输入（简单细胞），另外还有来自低速率中继细胞的直接输入和来自深层输出神经元的上行轴突分支的指导性输入。 上层神经元类型也是多种多样的，与深层类型一样，它们只发送下一个区域所需的内容。这些输出应被视为未完成的计算，继续与皮质的其余部分进行对话。</p><h2><a name='header-n90' class='md-header-anchor '></a>4. V2中的信息处理</h2><h3><a name='header-n91' class='md-header-anchor '></a>4.1 V2的功能</h3><p>V1将其大部分上层输出引导到相邻的皮层区域，主要是V2。因此，V2的视野图被布置成与V1镜像对称。这允许V1尽可能短地传递其中央凹的密集表示，并且通过较少的长距离连接传递其外围的较稀疏表示。V2大小为V1的77％，与V1相比，它的收缩似乎主要是由于V2对远边缘区域的修剪，其早期阶段的基本信息被挖掘出来，无需进一步分析。例如，来自全视野的信息已经从V1传输到上丘、LGN、脑桥核等。V2仍然是一个较全面的区域，为所有核心路径准备执行模式分析的下一阶段，如空间模式、颜色、运动和立体视觉。</p><p>V2似乎是通过集成这些属性来实现的，因此需要将V1中的数据重新整理为有效的布局。 V1隔离了各种属性：颜色、空间和运动的层、颜色和亮度的区块、双眼区块， V2将它们重新组合成与皮质表面相切的条带。例如，运动方向的图像会聚为厚条纹，颜色和亮度的区块会聚为细条纹，这种颜色和亮度深入的空间处理表明细条纹通过其表面特性分割物体的作用。 V2厚条纹（运动）从V1中的高速率层收集信息，细条纹从V1中的高速区块收集。简而言之，这些连接模式保持着在视锥输出时建立的平行度：从慢到慢，从快到快，从颜色到颜色，而且这种模式适用于各种感官方式。</p><h3><a name='header-n94' class='md-header-anchor '></a>4.2 V2对图像的分割与感知</h3><p>为了解释图像，需要将局部边缘元素连接为全局轮廓。实际上，当两个观察者将富图像中的所有边缘独立分配到特定轮廓时，它们的一致性为98％。这种分组的神经机制应该与自然图像中轮廓的统计特性相匹配。相应地，人类检测，是按照直接从边缘共现的统计中得出的局部整合规则，来定量地预测复杂背景中的轮廓。这个整合规则，与一个简单的整合规则相结合（如果A与B一起，B与C一起，则A与C一起），将局部整合的轮廓元素连接为更长的轮廓。如果两个边缘元素更可能来自相同的物理轮廓，则该规则绑定这两个元素。如果边缘元素与平滑、连续的轮廓一致，则它们更有可能属于相同的物理轮廓。轮廓分组还应该识别自然图像的高度并行结构。</p><p>V2的神经元响应被认为可能是通过优化来匹配这些更高阶的分组统计数据。这些神经元由具有相似Gabor感受野的较小集合的兴奋性神经元群所激活，但被具有各种不同Gabor感受野的较大集合的神经元群所抑制。因此，V2神经元仅在能够激活兴奋性Gabor神经元群的一些特征存在时才响应，并且不存在激活抑制神经元群的绝大多数特征。在这方面，V2提供了对于图像分割的关键进步：识别边缘的集合。V2感受野的直径比V1中的大几倍，即大约10倍的面积，并且像提供输入的V1复杂细胞一样，V2响应是对整个感受野的信息进行的概括整合。</p><p>V2神经元还检测将模式与背景分开的轮廓。在感知上，这可以通过立体地整合轮廓来实现。它也可以通过颜色和亮度来实现，因为两者在模式中往往比在边界上更相似，这也暗示了细条纹的作用。运动也会加强对区域边界的感知，这表明厚条纹的作用。</p><p>简而言之，V2似乎使用来自V1的各种信息流来从基本信号中分离模式。这种分割基于空间位置、颜色、立体表示和运动的信息。 V2需要所有这些信息流，它们显然是相互作用的。因此，这似乎是在这一大区域内保持所有通路紧密相连的一个很好的理由。</p><p>已经证明，视网膜和丘脑神经元的加权函数对于表示一阶图像的统计是最佳的，并且已经证明V1中的加权函数对于二阶统计量也是最佳的，但更高阶的图像统计尚未明确是否为最佳编码。三阶统计（纹理）的一个指标显示，具有较高信息内容的那些图像在视觉上比具有较少信息的图像更显著，这暗示皮质机制试图找到最丰富的模式。</p><p>我们已经达到了已知世界的边缘。我们将继续追踪视觉路径，以更粗略的方式向感知和行动的最后阶段前进。</p><h2><a name='header-n101' class='md-header-anchor '></a>5. 学习、感知与行为</h2><h3><a name='header-n102' class='md-header-anchor '></a>5.1 学习是大脑的适应机制</h3><p>对于生物设计，适应性反应是至关重要的。实际上，当前的经验都在不断地用于更新神经连接以改善性能。这些调整发生在所有大脑中，从小（秀丽隐杆线虫）到大。它们发生在所有系统中，从感觉到运动，从脊髓和小脑到大脑皮层。此外，在所有级别的电路组织中进行调整，从添加、去除和修改神经元中特定位点的蛋白质分子的构到添加和去除突触甚至整个神经元。</p><p>在成人人脑中，为满足新的需求，神经元在不停制造并且产生新的连接。为了使其能力适应不断变化的需求，成年人的海马体不断产生新的神经元。许多神经元已经死亡，但是在持续的实践中产生了一些新生神经元以建立新的电路，添加新的突触和新的连接。这些连接电路显然服务于新形成的记忆，因为在学习后不久删除新的神经元也会删除新记忆。海马体也会扩张，因为需要通过加强突触来存储记忆，这需要它们扩大。同样，皮质运动区域随着运动实践而扩展，视觉词形区域随着识字而扩展。</p><p>因此，大脑遵循服务于所有生物系统的核心原则：使用当前条件预测未来需求并相应地修改电路。在各种神经运动期间，大脑在时间尺度上从几毫秒到几十年不断调整，并且跨越从纳米到厘米的空间尺度。就像体育锻炼塑造特定的肌肉和骨骼一样，神经运动也会塑造特定的大脑回路。</p><p>这种生物学观点将学习定义为从现在到未来的信息的结构化渠道。目前的运动行为可以改善未来的运动技能，当前的感知和认知可以提高未来的感知和认知技能，当前的行为选择可以改善未来的选择。学习作为一种神经功能，受到空间、时间和能量的约束。学习必须遵守为神经设计的其他方面提出的所有原则。</p><p>学习的一个重要制约因素是空间。成年人的大脑无法扩张，因此，学习必须通过以下设计来保护空间：（1）具有空间区域特异性（2）只存储所需的东西（3）只在需要时存储（即选择性地忘记）（4）在处理信息的地点存储和检索信息（5）优化单个存储单元（大小和数量）（6）优化现实世界的监督信号。</p><h3><a name='header-n108' class='md-header-anchor '></a>5.2 特异性</h3><p>人类处理学习问题时，由特定的脑区负责特定的功能，不同的实践使不同的脑区扩大，在实践中扩展神经回路的设计还应该在电路持续未使用时回收电路。事实上，多年工作的出租车司机扩大了海马体，退休后恢复正常。在多年来练习一项技能时，我们忽略了无数其他技能。因此，在短期视觉召回测试中，出租车司机的表现低于平均水平。但同样，退休后其表现恢复正常。当被其他活动取代时，其原有技能迅速衰退，这就是专业运动员、音乐家和外科医生需要不断练习的原因。</p><h3><a name='header-n110' class='md-header-anchor '></a>5.3 只存储所需的内容</h3><p>哺乳动物的学习设计必须抑制生长，不能添加新的电路，除非它还准备通过修剪其他部分来腾出空间。成年人的大脑存储着无数的概念和程序。这些事实并不是瞬间学到的，而是经过了反复的接触和练习。这些信息会被组织成一个丰富的内容，并会加上一种情感。这种记忆，一旦情境化，附上了情感，并不断重复，几乎是无法消除的。我们的个体行为通过整合各种经验而成型，这是对不同情况作出迅速而合理的反应所必需的。简而言之，大脑投入巨大的资源来长期存储事实和经验，因为它们是不断重构神经回路的原材料。</p><p>大脑确实删除了真正的琐事细节和经验，因为它们缺乏情感。情感是必不可少的线索，是神经网络检索的参考。通过这种结构，我们逐渐提高了我们的感知、判断和行动的能力，我们逐渐改善我们对情绪的控制，以更好地基于理性和知识做出行为，并且我们逐渐改善对情绪产生的行为的智力控制。删除真正的琐事，但保留长期整合的情境化材料。简而言之，只存储所需的东西。</p><h3><a name='header-n113' class='md-header-anchor '></a>5.4 突触连接作为存储和检索信息的位点</h3><p>存储信息的明显位点是突触，通过改变其转移权重，即其激发或抑制突触后神经元的能力来进行存储。当我们研究大脑设计的蓝图时，我们不应该寻求信息存储的特殊器官，信息应该被存储在每个电路中。突触敏感性需要跨越所有时间尺度。快速、短暂的转换可以提高信息编码和处理的效率。这种短期突触可塑性符合学习的广泛定义：使用现有信息来调整电路，以提高未来处理现有信息的性能。它们通过改变释放概率、可释放的囊泡的大小和信号蛋白的敏感性来实现短期的突触可塑性。短期而言，它们不需要重组，因此没有额外的存储空间。但是，当信号统计变化更长时间时，电路需要进行重新的配置。</p><h3><a name='header-n115' class='md-header-anchor '></a>5.5 电路重构以实现长期记忆</h3><p>当统计数据在成年动物中稳定变化几天时，脑开始发生长期变化。休眠的突触得到加强，新休眠的突触受到抑制。同时，已形成的突触开始回收，用于适应新的模式。输入统计数据的短期变化（例如云、田地、森林的转变）导致视网膜、LGN和V1中的电路通过短期突触促进和抑制来适应。输入的长期变化（遮蔽眼睛）导致V1中的电路重构。短期适应性跨越毫秒到几分钟，而重构在几天内开始形成并持续数月到数年。中期的时间也会产生一定影响，如五天间歇暴露于定向光栅会诱发定向特异性的长期增强（LTP）。</p><p>重新调整特定电路必须平衡可能的收益与成本。有些区域在某些关键时期很容易重构，但是其他领域保持了永久性的高度可塑性和新轴突的生长能力。这种永久可塑性可能很昂贵，但收益可能很大。这表明学习设计的另一个原则是：某些大脑区域应该专注于保持高水平的可塑性，这使他们能够学习任意模式的子集，例如人类的某些皮层区域就是为了识别文字。</p><h3><a name='header-n118' class='md-header-anchor '></a>5.6 视觉词形区域</h3><p>左半球的腹侧枕颞皮层包含一个最近被称为视觉词形区域（VWFA）的区域。在童年早期，该区域用于识别物体、符号、房屋的图纸等。在推行文字阅读教育的国家中，孩童大约7岁时，这个区域开始拥有相比绘图而言对书面文字更强烈的反应。在随后的整个生命中，它始终是这个区域，没有区域可以学习写作，无论是字母还是符号。简化阅读需要以某种格式存储数以千计的符号，以便快速访问。阅读能力极大地扩展了个人的信息存储容量。书面文字与绘图的选择性增长不是自发发生的，而是基于监督。它必须从较高的皮层区域自上而下开始，较高视觉区域调整较低区域以获得具有象征意义的线段。</p><p>皮质分各个专门领域以快速识别各种关键的元素：面部、声音、物体。 现在我们看到同样的规则适用于存储无数任意符号及负责快速回忆的区域。 在200ms间隔内，调用的消息会转发到语言区域以调用此字符串的含义，并将其与前面的字符串集成以理解更大的消息。 简而言之，捕获的文本片段被充分处理以驱动下一个扫视，读取不允许未处理的片段堆积在缓冲区中。 有了这一切，VWFA中的停留时间只能使用200毫秒间隔的一小部分，所以对单词的视觉回忆必须很快。</p><p>VWFA与语言网络的前向耦合及其自上而下的早期视觉区域重建都发生在成年人学习阅读时。唯一缺点是它需要头骨中的空间。在VWFA中，随着文字存储的发展，大脑对物体和面部的电路进行选择性修剪。因此，改善一种功能的可塑性会导致另一种功能衰退。同样，存储容量受空间限制。因此，学习的设计必须包括决定存储内容的规则。</p><h3><a name='header-n122' class='md-header-anchor '></a>5.7 重复是大脑存储的重要方式</h3><p>在学习词汇时，存储每一个音节是低效的，记忆库很快就会充满垃圾。因此，为了节省空间，真正的词汇需要从噪声中提取。在这方面，大脑应该收集特定话语属于词汇库的证据，这意味着重复。正如我们现在所述，皮层有明确的处理规则。规则当然看似谨慎，但它们是否是最优的还是未知。</p><p>当没有存储在词汇库中的单词被发声时，其诱发电压最初不同于已知单词所引起的电压，它并没有本地化到语言区域。然而，随着词汇的重复，其特征最终类似于已知单词的特征，其本地化也是如此。在14分钟内重复160次之后，一个伪词被允许进入词典并存储在语言复合体内，特别是在听觉流的腹部区域。 伪词缺乏语义，但它的电压看起来像一个单词，它与真实的单词一起存储。显然，单词最初是在没有意义的情况下存储的，可能将它们与噪声区分开来的并不是单词的意义，而是不断地重复。</p><p>这些语言区域与VWFA耦合，显然通过自上而下的信号激活它。也就是说，当有声单词激活语言区域时，它指示VWFA存储相应的拼写形状。通过自上而下的指令，VWFA增加了与语言区域的连接，这些语言区域需要将意义附加到形状。我们已经注意到一系列的例子：在听觉语言区域学习几分钟就可以学习任意声音模式，例如伪词。在VWFA中以类似的时间尺度学习任意视觉图像，例如拼写形状。掌握两种语言需要在听觉皮层中有更多的空间。这些设计共享的是重复。重复是大脑发现值得存储的重要方式。</p><h3><a name='header-n126' class='md-header-anchor '></a>5.8 突触的记忆存储机制</h3><p>信息在突触处被存储和检索。通过增加突触权重，即其影响对突触后神经元的激活来进行存储。突触的空间已经受到局部连接和远距离连接竞争的限制，并且皮质突触已经尽可能小。事实上，为了增加其突触权重，突触必须扩大。突触前末端扩大以容纳更多囊泡和更多活性区域以释放。突触后结构，通常是树突棘，也扩大，以容纳更多的激活信号受体。较大的突触可以存储和调用更多信息，因为它具有更高的信噪比，但这需要更多的空间和材料。因此，在低信噪比的许多小突触处存储信息更有效。正如信息以较低的速率能更有效地传输一样，它也可以更有效地存储在低容量的突触中。</p><p>一些设计特征提高了低容量突触的存储效率。首先，在突触集合中，正负权重是平衡的，这消除了冗余并且仅允许存储所需的内容。其次，存储基于稀疏激活的方式，因此给定的突触不太频繁地响应于两个或更多个不同的输入模式而改变权重。因此，稀疏性减少了存储的模式之间的干扰。第三， 防止突触不断增加其权重，因为这需要持续增加信噪比，从而增加突触大小。因此，突触权重的上限应设置为存储容量较小并且信噪比较低的方案。</p><p>突触权重受三种机制的限制：（1）突触受到物理限制而不能大幅扩大（2）Hebbian突触在突触后神经元动作电位之前激活时增加权重，但在动作电位后激活它们会减轻权重。因此，当突触电位和动作电位随机发生时，也就是说，学习没有相关性时，权重不发生改变（3）突触可塑性受稳态调节。</p><p>稳态机制调节突触受体转换的速率，使得每个突触的权重以恒定比例减少或增加。这种标准化保留了由存储的模式建立的权重的相对差异，成本较低并且保持了效率。因此，局部稳态使突触可塑性允许学习更广泛的模式。突触的再平衡十分缓慢，使其不会因为新记忆的形成而消除记忆。</p><h3><a name='header-n131' class='md-header-anchor '></a>5.9 短期记忆的分子设计</h3><p>记忆开始于谷氨酸与皮质树突棘的受体结合。受体改变构象以允许去极化阳离子的大量内流。记忆形成的关键触发因素是钙浓度的短暂上升，这通过各种方式发生。如果树突棘表达GluR2亚基，钙将直接通过通道进入，如果树突棘表达电压门控钙通道，钙会在去极化期间进入，如果树突棘表达NMDA型谷氨酸受体（NMDAR），且谷氨酸结合与强烈的去极化同时发生，则钙将通过通道进入。树突棘表达约10个谷氨酸受体和约10个电压门控钙通道。这些设定限制了钙激增的程度。对于钙激增引发的突触强化，其应该是短暂的和局部的。这种情况发生在短暂的通道开放时，因为细胞质钙浓度在通道处急剧上升并在纳米距离后急剧衰减。钙通量应足够小，以便泵和交换器能够迅速使其恢复初始浓度。单个通道噪音较高，流入的钙太少，10个通道可以充分提高信噪比以匹配突触前释放的信噪比，但更多可能会使突触饱和。当钙离子与附着在突触后膜内表面的特定激酶（CaM激酶II）结合时，酶会改变构象并开始磷酸化谷氨酸受体，从而改变它们的构象，使得它们在下一次谷氨酸结合时将引起更大的内向电流，这种增强会增加突触权重。</p><p>这种设计简单地调整了大约10种受体蛋白的构象，以增加突触权重。然而，虽然权重的变化远远超过了初始状态，但这种变化仍然会衰退。钙在几毫秒内被泵出，激酶在几秒内失活，磷酸化的谷氨酸受体通过内吞作用在一小时左右从膜中复原。由于磷酸化受体被来自树突棘细胞质库的非磷酸化受体取代，增强的突触电流恢复正常。初始存储的这种衰减是一个关键的设计特征，因为它阻止了长期存储事件，这些事件结果只是短暂相关的或者影响不大的。这种存储模式，包括早期的长期增强，均投资较少，然后很快被遗忘。促使行为重复的一个重要信号是多巴胺，其在特定脑区域内释放。当多巴胺在增强的树突棘附近释放时，它会与D1受体结合，从而触发激活多种激酶的G蛋白级联反应，每种激酶在扩展LTP并将其转化为稳定的存储中起特定作用。</p><h3><a name='header-n134' class='md-header-anchor '></a>5.10 长期记忆的分子设计</h3><p>树突附近停留的信使RNA翻译得到PKMζ，PKMζ有磷酸化负责调解内吞作用的蛋白质的机能，神经元通过PKMζ的作用可以稳定地增加突触后膜中受体的数量，信号即可引发稳定的突触后扩张并引发突触前扩张以与之匹配。通过这种方式，突触前和突触后机制将突触增强延长了数小时。</p><p>与此同时，多巴胺还在树突棘内聚集了另一种激酶PKA，它激活树突和细胞核的信号通路，这些通路现在产生了许多新的可塑性相关蛋白。这些新蛋白质使强化状态稳定超过4小时。对于多巴胺将早期LTP转换为长期LTP的作用，其在突触中作用的准确时间不一定是关键的。 多巴胺可以稳定激活前几分钟或后几分钟发生的事件。因此，为了启动长期存储，多巴胺只需要在最终衰变之前捕获即可，并且它也能延长任何早期的LTP。</p><p>在确定特定记忆（即特定的事件关联）时涉及的突触数量尚未确定，我们对于如何将记忆的模式读入特定的突触组合然后读出来知之甚少。然而，有一种有趣的可能性，即单个树突上的突触聚类可以合作存储记忆。长期LTP是轻度的，单个尖峰可能达不到稳定的阈值，但是在树突上，它们共享可塑性相关的蛋白质，因此它们一起稳定。这种设计可以实现高效的检索。多巴胺的阶段性释放激活了导致行为重复的奖励回路。重复可以增强树突棘的早期LTP，并最终将它们转换为长期LTP。</p><h3><a name='header-n138' class='md-header-anchor '></a>5.11 记忆如何与学习相结合</h3><p>到目前为止，我们已经考虑了存储设计。但学习的目的是存储与特定信号相关的信息，以便可以检索。单词的声音会回忆其书面形式。如何在突触处建立这种联系？</p><p>一个关键点是谷氨酸受体的设计非常巧妙。当NMDA受体结合一定量的谷氨酸时，其阳离子通道仅允许适度的电流，因为通道的入口处被镁离子部分地阻挡。然而，当不同的输入激发神经元发射尖峰时，强烈的去极化会使镁从通道中排出，从而允许钙离子内流。这种钙脉冲引发早期LTP，因此，当符号激发VWFA中金字塔形树突上的尖峰时，响应迅速消退。但是如果声音引起尖峰而视觉符号激发NMDA受体，它们会完全打开以加强尖峰。这种机制被称为Hebbian。 NMDA渠道是其中一个重要的例子。在这里，所需要的只是在时间上耦合两个输入以驱动细胞内钙的激增。 Purkinje细胞以不同的机制实现这一目的，通过激酶驱动的信号级联。这些设计均采用了重合检测，但仅此一点是不够的，因为它并不表明巧合是偶然的还是有意义的，这就是为什么单个可疑巧合的突触增强被允许消散的原因。</p><p>然而，如果巧合重复，统计证据表明这不是偶然的。如果之后是一些有益的事件，则行为会重复。如果口渴的实验动物意外按下杠杆并收到一滴果汁，它可能会再次按下。如果一个读者看到符号并听到它的声音，则符号和声音的重合是可疑的，需要重复以确认该关联。奖励是赞美或是掌握感之类的。</p><p>大脑有一个内部信号代表所有这些奖励，这是一种多巴胺的脉冲释放。多巴胺能轴突分布在对学习至关重要的各个部位。一些区域，如前额皮质，选择行为并评估是否应重复。其他区域，如纹状体和下丘脑，推动了重复。从这些区域开始，电极可以比普通的外部奖励（例如食物或性）更有效地推动重复。选择和评估的位点通过长循环与驱动重复的位点连接。</p><p>许多区域的存储由多巴胺输入直接驱动，如前额叶皮质、纹状体和杏仁核，在那里制定存储或不存储的决定。然而，更接近感觉的区域，例如VWFA和语言区域，不接受多巴胺输入，因此它们的突触需要不同的机制来启动长期存储。这些后部区域从前部皮层区域获得丰富的反馈连接，其中复杂的决策在较高级别计算，然后执行命令（存储或不存储）传回早期区域。哪种特定的化学信号启动VWFA中树突棘的长期存储仍有待确定。</p><p>奖励设计规范在眶额皮质的确定区域实例化。该区域（区域13和附近区域）接收来自基本上所有感觉方式和边缘结构（如杏仁核和伏隔核）的收敛输入。该区域在选择期间变得活跃，此外，它包含主观价值选择的神经元，这些神经元可以比外界输入更能刺激奖励。</p><p>价值编码神经元应优化其编码值的能力，这需要响应与奖励构成陡峭的曲线。值编码神经元需要沿着奖励轴不断修正该曲线，以匹配平均奖励分布的变化。此外，如果为更好地编码更宽的奖励分布，神经元应该使曲线变平。在眶额皮质中记录的大约四分之一的价值编码神经元以这种方式表现。最高皮质水平的神经元使用相同的自适应设计（修正响应曲线）。正如我们已经指出的那样，任何使用当前输入来形成未来响应的机制，目的都是将信息从现在投射到未来以指导行为。</p><h3><a name='header-n146' class='md-header-anchor '></a>5.12 通过预测与实际的误差学习</h3><p>对于任何学习者，最有效的监督信号均是通过时间差分（temporal difference）模型的计算。行为选择由内部信号评估，该信号将当前经历的奖励值与预期奖励值进行比较，报告实际和预测奖励之间的差异，反馈到预测的选择机制。即，实际如果比预测更好，则行为重复，实际如果比预测的更差，则丢弃信息。定量地，该奖励预测误差是奖励信号的幅度除以其概率分布的标准偏差。随着学习的进行，错误减少，因此学习率下降。当奖励和预测相同时，不会发生学习。这种最佳监督信号的一个标志是其时序定位偏移，它密切关注食物、性、金钱等客观奖励。聚集在腹侧中脑的限定区域中的神经元正好显示出这些属性，以低平均速率激活，然后在行为出乎意料获得良好回报时进行调整。当行为得到奖励，但没有比预期更好时，不会发生尖峰爆发。这个关键的监督信号的动态范围似乎非常小：大约从4Hz上升到大约40Hz，但持续只有大约100 ms，因此会产生4个尖峰。看起来令人惊讶的是，快乐可能取决于这种狭窄的信号，这种动态范围与视网膜神经节细胞类似。</p><p>监督神经元需要广泛地传达他们的信号：所有表示价值的区域、做出选择的领域以及选择行动的地方。这包括眶额皮质、选择运动的背侧纹状体（尾状肌）、产生情绪的腹侧纹状体（伏隔核）。</p><p>为了向大量神经组织传递这种教学信号，人类需要每个半球200000个神经元，这大约是视觉神经元的五分之一。但这两个任务基本上是相反的，神经节细胞需要独立发出信号并保留精细的空间图，但监督神经元需要在整个半球内同步发送一条信息。当向所有突触广播相同的监督信号时，在重复行为期间已经加强的将全部加强。</p><p>多巴胺是哺乳动物用于奖励预测错误所释放的神经递质。因此，有效学习所需的监督信号是一个短暂的多巴胺脉冲。如果行为传递积极的奖励预测错误，则监督信号鼓励行为重复。这种设计将多巴胺脉冲与引起幸福感的主观脉冲机制相结合。</p><p>从理论的角度来看，时间差分学习是一种高效的设计。此外，大脑通过多巴胺神经元有效地执行它，激发短暂的慢动作电位，以准无线（短化学扩散）的方式传递主观幸福感脉冲，将意外事件编码为监督信号。这在自然环境中非常出色，因为自然环境难以预测，因此具有各种小的惊喜和频繁的主观幸福脉冲，但现代环境的设计具有高度可预测性。因为监督信号是简短的，所以幸福感必须是偶然的。当环境以某种频率提供小的奖励预测误差信号时，人们可以忍受。然而，随着环境变得更加可预测，这些信号的来源变少，并且满足之间的间隔延长，在不可预测的环境中进行学习的有效设计变成了在一个可预测的环境中感到不满的设计。</p><h2><a name='header-n154' class='md-header-anchor '></a>未来工作</h2><p>学习过程中深感自然科学知识体系的庞大与精美。目前还是会继续沉浸在自然科学的唯美之中，继续研读相关的书籍和论文。</p><p>&nbsp;</p></div>
+</body>
+</html>
