@@ -167,6 +167,7 @@ body{
 .middle_description{
 	padding-left: 8px;
 	padding-bottom: 8px;
+	line-height: 30px;
 	font-size: 18px;
 	color: rgb(12,27,37);}
 .middle_description img{
@@ -280,7 +281,7 @@ body{
 
 
 footer{text-align: center;font-size: 16px}
-footer a:link{
+/*footer a:link{
 	color: rgb(26,161,240);
 	padding: 8px;
 	text-decoration: none;}
@@ -288,7 +289,7 @@ footer a:visited{
 	color: rgb(26,161,240);
 	padding: 8px;
 	text-decoration: none;}
-footer a:hover{color: rgb(1,84,128);}
+footer a:hover{color: rgb(1,84,128);}*/
 
 
 

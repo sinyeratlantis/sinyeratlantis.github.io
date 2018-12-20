@@ -310,7 +310,7 @@ body{
 
 
 footer{text-align: center;font-size: 16px}
-footer a:link{
+/*footer a:link{
 	color: rgb(26,161,240);
 	padding: 8px;
 	text-decoration: none;}
@@ -318,7 +318,7 @@ footer a:visited{
 	color: rgb(26,161,240);
 	padding: 8px;
 	text-decoration: none;}
-footer a:hover{color: rgb(1,84,128);}
+footer a:hover{color: rgb(1,84,128);}*/
 
 
 
