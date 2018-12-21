@@ -5,6 +5,7 @@
 
 
 body{
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 	background-color: snow;
 	font-family: sans-serif;
 	line-height:24px;
@@ -57,12 +58,10 @@ body{
 	text-decoration: none;}
 .navbar_list a:hover{color: rgb(26,161,240);}
 
-
-.navbar_menu_location{margin-left: 10%;}
+.navbar_menu_location{margin-left: 10%;margin-top: -14.4%;}
 .navbar_menu{
 	display:none;
 	margin-left: 470px;
-	margin-top: -186px;
 	width: 180px;
 	height: 210px;
 	background-color: rgb(250,250,245);
@@ -71,12 +70,12 @@ body{
 	float: left;
 	position: absolute;}
 .navbar_menu ul{
-	position: absolute;
 	margin-left: 0px;
 	margin-top: 0px;
-	float: left;
 	list-style-type: none;
-	padding-top: 12px;}
+	padding-top: 12px;
+	float: left;
+	position: absolute;}
 .navbar_menu li{
 	padding-top: 4px;
 	padding-bottom: 4px;
@@ -105,20 +104,19 @@ body{
 	position: absolute;}
 .icon{
 	width: 80%;
-	margin: 0px auto;
-	padding-top: 180px;}
+	margin: 0 auto;
+	padding-top: 14%;}
 .icon img{
 	border-radius: 100px;
 	display: inline;
 	width: 200px;
 	height: 200px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	box-shadow: 0 0 20px rgba(0,0,0,0.5);
 	float: left;
 	position: absolute;}
 
 /* —————split bar——————— */
 
-.padding{padding-top: 120px;}
 .padding_left{padding-top: 72px;}
 
 
@@ -126,7 +124,8 @@ body{
 	background-color: white;
 	width: 100%;
 	height: 60px;
-	margin-top: -40px;
+	margin-top: 20%;
+	height: expression(this.clientWidth);
 	box-shadow: 0 0 4px rgba(0,0,0,0.4);}
 
 /* —————content & left——————— */
@@ -134,7 +133,7 @@ body{
 .content{width: 80%;margin: 0px auto;}
 
 
-.span_left{width: 18%;float: left;margin-left:0px;}
+.span_left{width: 18%;float: left;margin-left:0px;margin-top: -5%;padding-top: 67px;}
 .span_left a:link{
 	color: rgb(102,117,127);
 	text-decoration: none;}
@@ -160,7 +159,7 @@ body{
 .span_middle{width: 60%;float: left;padding-left: 20px;}
 
 .middle_title{
-	padding-top: 24px;
+	padding-top: 32px;
 	padding-left: 6px;
 	font-size: 32px;
 	color: rgb(102,117,127)}
@@ -179,7 +178,7 @@ body{
 
 /* —————content right——————— */
 
-.span_right{width: 16%;float: left;}
+.span_right{width: 17%;float: left;}
 
 .right_description{
 	width: 200px;
