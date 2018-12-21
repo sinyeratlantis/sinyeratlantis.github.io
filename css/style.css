@@ -26,7 +26,7 @@ body{
 	padding-top: 8px;
 	padding-left: 26px;
 	font-family:"Times New Roman",Georgia,Serif;
-	font-size: 28px;
+	font-size: 26px;
 	color: rgb(204,108,89);
 	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
 	float: left;}
@@ -41,7 +41,7 @@ body{
 	list-style-type: none;	
 	float: left;}
 .navbar_list li{
-	font-size: 18px;
+	font-size: 16px;
 	padding-left: 12px;
 	display: inline;}
 .navbar_list a:link{
@@ -62,7 +62,7 @@ body{
 .navbar_menu_location{margin-left: 10%;margin-top: -18.5%;}
 .navbar_menu{
 	display:none;
-	margin-left: 470px;
+	margin-left: 448px;
 	width: 180px;
 	height: 210px;
 	background-color: rgb(250,250,245);
@@ -80,7 +80,7 @@ body{
 .navbar_menu li{
 	padding-top: 4px;
 	padding-bottom: 4px;
-	font-size: 18px;
+	font-size: 16px;
 	padding-left: 12px;}
 .navbar_menu a:link{
 	color: rgb(26,161,240);
@@ -145,14 +145,14 @@ body{
 
 
 .left_name{
-	font-size: 24px;
+	font-size: 22px;
 	font-weight: bold;
 	padding-left: 10px;
 	padding-bottom: 4px;}
 .left_description{
 	padding-left: 8px;
 	padding-bottom: 8px;
-	font-size: 16px;
+	font-size: 14px;
 	color: rgb(102,117,127);}
 
 /* —————content middle——————— */
@@ -164,7 +164,7 @@ body{
 .middle_title{
 	padding-top: 24px;
 	padding-left: 24px;
-	font-size: 32px;
+	font-size: 30px;
 	color: rgb(102,117,127);}
 
 .middle_table{
@@ -175,7 +175,7 @@ body{
 	box-shadow: 0 0 2px rgba(245, 226, 189, 1);}
 
 .middle_table td{
-	font-size: 18px;
+	font-size: 16px;
 	padding: 18px;
 	padding-left: 24px;
 	text-align: left;
@@ -190,14 +190,14 @@ body{
 .middle_table a:hover{color: rgb(80,124,168);}
 
 .middle_table .first{
-	font-size: 18px;
+	font-size: 16px;
 	padding: 18px;
 	padding-left: 24px;
 	text-align: left;
 	border-top: none;}
 
 .middle_table .right{
-	font-size: 14px;
+	font-size: 12px;
 	padding: 18px;
 	padding-left: 20px;
 	text-align: right;
@@ -217,7 +217,7 @@ body{
 	box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 	margin-left: 40px;
 	margin-top: 20px;
-	font-size: 16px;
+	font-size: 14px;
 	color: rgb(0,0,0);}
 
 .right_block1{float: left;position: relative;}
@@ -234,7 +234,7 @@ body{
 .right_title1{
 	padding-left: 65px;
 	padding-top: 55px;
-	font-size: 18px;
+	font-size: 16px;
 	color: rgb(102,117,127);
 	float: left;
 	position: absolute;}
@@ -250,7 +250,7 @@ body{
 .right_list1 li{
 	padding: 4px;
 	border-top: 1px solid rgba(0,0,0,0.1);
-	font-size: 16px;
+	font-size: 14px;
 	padding-left: 12px;}
 .right_list1 a:link{
 	color: rgb(26,161,240);
@@ -280,7 +280,7 @@ body{
 .right_title2{
 	padding-left: 65px;
 	padding-top: 55px;
-	font-size: 18px;
+	font-size: 16px;
 	color: rgb(102,117,127);
 	float: left;
 	position: absolute;}
@@ -296,7 +296,7 @@ body{
 .right_list2 li{
 	padding: 4px;
 	border-top: 1px solid rgba(0,0,0,0.1);
-	font-size: 16px;
+	font-size: 14px;
 	padding-left: 12px;}
 .right_list2 a:link{
 	color: rgb(26,161,240);
@@ -309,7 +309,7 @@ body{
 .right_list2 a:hover{color: rgb(1,84,128);}
 
 
-footer{text-align: center;font-size: 16px}
+footer{text-align: center;font-size: 14px}
 /*footer a:link{
 	color: rgb(26,161,240);
 	padding: 8px;
