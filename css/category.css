@@ -159,8 +159,6 @@ body{
 
 .span_middle{width: 60%;float: left;padding-left: 20px;}
 
-
-
 .middle_title{
 	padding-top: 24px;
 	padding-left: 24px;
@@ -199,10 +197,25 @@ body{
 .middle_table .right{
 	font-size: 12px;
 	padding: 18px;
-	padding-left: 20px;
 	text-align: right;
 	color: rgb(102,117,127);
-	border-top: 1px solid rgba(0,0,0,0.1)}
+	border-top: 1px solid rgba(0,0,0,0.1);}
+
+.double_table{width:100%;border-collapse:collapse;}
+
+.middle_table .double{
+	font-size: 12px;
+	padding: 0px;
+	padding-right: 18px;
+	text-align: right;
+	color: rgb(102,117,127);
+	border-top: 1px solid rgba(0,0,0,0.1);}
+.middle_table .double_td{
+	font-size: 12px;
+	padding: 0px;
+	text-align: right;
+	color: rgb(102,117,127);
+	border-top: none;}
 
 /* —————content right——————— */
 
