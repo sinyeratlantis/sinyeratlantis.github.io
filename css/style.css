@@ -125,7 +125,7 @@ body{
 	background-color: white;
 	width: 100%;
 	height: 50px;
-	margin-top: 24.5%;
+	margin-top: 24%;
 	height: expression(this.clientWidth);
 	box-shadow: 0 0 4px rgba(0,0,0,0.4);}
 
@@ -158,7 +158,6 @@ body{
 /* —————content middle——————— */
 
 .span_middle{width: 60%;float: left;padding-left: 20px;}
-
 
 
 .middle_title{

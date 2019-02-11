@@ -59,7 +59,7 @@ body{
 .navbar_list a:hover{color: rgb(26,161,240);}
 
 
-.navbar_menu_location{margin-left: 10%;margin-top: -17.4%;}
+.navbar_menu_location{margin-left: 10%;margin-top: -16.5%;}
 .navbar_menu{
 	display:none;
 	margin-left: 448px;
@@ -106,7 +106,7 @@ body{
 .icon{
 	width: 80%;
 	margin: 0 auto;
-	padding-top: 17%;}
+	padding-top: 16%;}
 .icon img{
 	border-radius: 100px;
 	display: inline;
@@ -124,7 +124,7 @@ body{
 .split{
 	background-color: white;
 	width: 100%;
-	height: 60px;
+	height: 50px;
 	margin-top: 22%;
 	height: expression(this.clientWidth);
 	box-shadow: 0 0 4px rgba(0,0,0,0.4);}
@@ -134,7 +134,7 @@ body{
 .content{width: 80%;margin: 0px auto;}
 
 
-.span_left{width: 18%;float: left;margin-left:0px;margin-top: -5%;padding-top: 85px;}
+.span_left{width: 18%;float: left;margin-left:0px;margin-top: -5%;padding-top: 80px;}
 .span_left a:link{
 	color: rgb(102,117,127);
 	text-decoration: none;}
