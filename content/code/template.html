@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<style type='text/css'>
+:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+
+#write li > figure:first-child { margin-top: -20px; }
+#write ol, #write ul { position: relative; }
+
+textarea { color: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; }
+
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+
+.CodeMirror-gutters { border-right-width: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit inherit; background-repeat: inherit inherit; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+
+#write .footnote-line { white-space: pre-wrap; }
+
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; white-space: nowrap; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; border: none !important; background-position: 0px 0px !important; background-repeat: initial initial !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-width: 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; background-position: 0px 0px; background-repeat: initial initial; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right-width: 30px; border-right-style: solid; border-right-color: transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right-style: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right-style: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+
+
+#write {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px;
+    padding-bottom: 100px;
+}
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 16px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 0.2em 1em;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+.md-fences {
+  background-color: #f8f8f8;
+}
+
+#write pre.md-meta-block {
+  padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+#write>h3.md-focus:before{
+  left: -1.5625rem;
+  top: .375rem;
+}
+#write>h4.md-focus:before{
+  left: -1.5625rem;
+  top: .285714286rem;
+}
+#write>h5.md-focus:before{
+  left: -1.5625rem;
+  top: .285714286rem;
+}
+#write>h6.md-focus:before{
+  left: -1.5625rem;
+  top: .285714286rem;
+}
+</style>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sinyer's blog</title>
+
+    <link rel="icon" href="../../pic/smile.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../pic/smile.png" type="image/x-icon" />
+
+    <meta name="description" content="">
+    <meta name="author" content="Sinyer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <link href="../../css/code.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar_name">Sinyer's blog</div>
+            <div class="navbar_icon">
+                <img src="../../pic/smile.png">
+            </div>
+            <div class="navbar_list">
+                 <ul>
+                     <li><a href="../../index.html">Home</a></li>
+                     <li><a href="../../profile.html">Profile</a></li>
+                     <li><a href="../../index.html" onmouseover="menu_in()" onmouseout="menu_out()">Category</a></li>
+                     <li><a href="../../category/wp.html">Conception</a></li>
+                 </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stack">
+        <div class="background">
+            <img src="../../pic/bg1.jpg">
+        </div>
+
+        <div class="icon">
+            <img src="../../pic/icon1.png">
+        </div>
+    </div>
+    
+    <div class="navbar_menu_location">
+        <div id="navbar_menu" class="navbar_menu" onmouseover="list_in()" onmouseout="list_out()">
+            <ul>
+                <li><a href="../../category/ir.html">Intelligence R.</a></li>
+                <li><a href="../../category/co.html">Cogitations</a></li>
+                <li><a href="../../category/ml.html">Machine Learning</a></li>
+                <li><a href="../../category/dl.html">Deep Learning</a></li>
+                <li><a href="../../category/rl.html">Reinforcement L.</a></li>
+                <li><a href="../../category/wp.html">Conception</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="split"></div>
+
+    <div class="content">
+
+        <div class="span_left">
+            <div class="padding_left"></div>
+            <div class="left_name">Sinyer</div>
+            
+            <div class="left_description">
+                @<a href="index.html">sinyeratlantis</a>
+            </div>
+            <div class="left_description">
+                Major in machine learning, video analysis, and neural coding.
+            </div>
+            <div class="left_description">
+                Work at <a href="http://insis.bjtu.edu.cn/">INSIS</a>, BJTU.
+            </div>
+            <div class="left_description">
+                sinyeratlantis@gmail.com
+            </div>
+            <br/>
+            
+        </div>
+
+        <div class="span_middle">
+            
+            <div class='typora-export' ><div id='write'  class = 'is-mac'><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded md-focus" lang="python" style="page-break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap CodeMirror-focused" lang="python"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 3075px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">torch</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">torch</span>.<span class="cm-property">nn</span> <span class="cm-keyword">as</span> <span class="cm-variable">nn</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">torch</span>.<span class="cm-property">nn</span>.<span class="cm-property">functional</span> <span class="cm-keyword">as</span> <span class="cm-variable">F</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">from</span> <span class="cm-variable">torch</span>.<span class="cm-property">autograd</span> <span class="cm-keyword">import</span> <span class="cm-variable">Variable</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">numpy</span> <span class="cm-keyword">as</span> <span class="cm-variable">np</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">import</span> <span class="cm-variable">gym</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">class</span> <span class="cm-def">ActorNetwork</span>(<span class="cm-variable">nn</span>.<span class="cm-property">Module</span>):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">def</span> <span class="cm-def">__init__</span>(<span class="cm-variable-2">self</span>, <span class="cm-variable">input_size</span>, <span class="cm-variable">hidden_size</span>, <span class="cm-variable">action_size</span>):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-builtin">super</span>(<span class="cm-variable">ActorNetwork</span>, <span class="cm-variable-2">self</span>).<span class="cm-property">__init__</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-2">self</span>.<span class="cm-property">fc1</span> = <span class="cm-variable">nn</span>.<span class="cm-property">Linear</span>(<span class="cm-variable">input_size</span>, <span class="cm-variable">hidden_size</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-2">self</span>.<span class="cm-property">fc2</span> = <span class="cm-variable">nn</span>.<span class="cm-property">Linear</span>(<span class="cm-variable">hidden_size</span>, <span class="cm-variable">hidden_size</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-2">self</span>.<span class="cm-property">fc3</span> = <span class="cm-variable">nn</span>.<span class="cm-property">Linear</span>(<span class="cm-variable">hidden_size</span>, <span class="cm-variable">action_size</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">def</span> <span class="cm-def">forward</span>(<span class="cm-variable-2">self</span>, <span class="cm-variable">x</span>):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">out</span> = <span class="cm-variable">F</span>.<span class="cm-property">relu</span>(<span class="cm-variable-2">self</span>.<span class="cm-property">fc1</span>(<span class="cm-variable">x</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">out</span> = <span class="cm-variable">F</span>.<span class="cm-property">relu</span>(<span class="cm-variable-2">self</span>.<span class="cm-property">fc2</span>(<span class="cm-variable">out</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">out</span> = <span class="cm-variable">F</span>.<span class="cm-property">log_softmax</span>(<span class="cm-variable-2">self</span>.<span class="cm-property">fc3</span>(<span class="cm-variable">out</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-variable">out</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">class</span> <span class="cm-def">ValueNetwork</span>(<span class="cm-variable">nn</span>.<span class="cm-property">Module</span>):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">def</span> <span class="cm-def">__init__</span>(<span class="cm-variable-2">self</span>, <span class="cm-variable">input_size</span>, <span class="cm-variable">hidden_size</span>, <span class="cm-variable">output_size</span>):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-builtin">super</span>(<span class="cm-variable">ValueNetwork</span>, <span class="cm-variable-2">self</span>).<span class="cm-property">__init__</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-2">self</span>.<span class="cm-property">fc1</span> = <span class="cm-variable">nn</span>.<span class="cm-property">Linear</span>(<span class="cm-variable">input_size</span>, <span class="cm-variable">hidden_size</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-2">self</span>.<span class="cm-property">fc2</span> = <span class="cm-variable">nn</span>.<span class="cm-property">Linear</span>(<span class="cm-variable">hidden_size</span>, <span class="cm-variable">hidden_size</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-2">self</span>.<span class="cm-property">fc3</span> = <span class="cm-variable">nn</span>.<span class="cm-property">Linear</span>(<span class="cm-variable">hidden_size</span>, <span class="cm-variable">output_size</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">def</span> <span class="cm-def">forward</span>(<span class="cm-variable-2">self</span>, <span class="cm-variable">x</span>):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">out</span> = <span class="cm-variable">F</span>.<span class="cm-property">relu</span>(<span class="cm-variable-2">self</span>.<span class="cm-property">fc1</span>(<span class="cm-variable">x</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">out</span> = <span class="cm-variable">F</span>.<span class="cm-property">relu</span>(<span class="cm-variable-2">self</span>.<span class="cm-property">fc2</span>(<span class="cm-variable">out</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">out</span> = <span class="cm-variable-2">self</span>.<span class="cm-property">fc3</span>(<span class="cm-variable">out</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-variable">out</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># ----------------------------------------------- #</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">env</span> = <span class="cm-variable">gym</span>.<span class="cm-property">make</span>(<span class="cm-string">"CartPole-v0"</span>).<span class="cm-property">unwrapped</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">value_network</span> = <span class="cm-variable">ValueNetwork</span>(<span class="cm-number">4</span>, <span class="cm-number">40</span>, <span class="cm-number">1</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">value_network_optim</span> = <span class="cm-variable">torch</span>.<span class="cm-property">optim</span>.<span class="cm-property">Adam</span>(<span class="cm-variable">value_network</span>.<span class="cm-property">parameters</span>(), <span class="cm-variable">lr</span>=<span class="cm-number">0.01</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">actor_network</span> = <span class="cm-variable">ActorNetwork</span>(<span class="cm-number">4</span>, <span class="cm-number">40</span>, <span class="cm-number">2</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">actor_network_optim</span> = <span class="cm-variable">torch</span>.<span class="cm-property">optim</span>.<span class="cm-property">Adam</span>(<span class="cm-variable">actor_network</span>.<span class="cm-property">parameters</span>(), <span class="cm-variable">lr</span>=<span class="cm-number">0.01</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># ----------------------------------------------- #</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">epochs</span> = <span class="cm-number">2000</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">render</span> = <span class="cm-keyword">False</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">running_add</span> = <span class="cm-number">0</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">temp</span> = <span class="cm-number">0</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">first_time</span> = <span class="cm-keyword">True</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">for</span> <span class="cm-variable">epoch</span> <span class="cm-keyword">in</span> <span class="cm-builtin">range</span>(<span class="cm-variable">epochs</span>):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">s</span> = <span class="cm-variable">env</span>.<span class="cm-property">reset</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">epoch_state</span> = []</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">epoch_action</span> = []</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">epoch_reward</span> = []</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">while</span> <span class="cm-keyword">True</span>:</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">if</span> <span class="cm-variable">render</span>:</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">env</span>.<span class="cm-property">render</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">log_prob</span> = <span class="cm-variable">actor_network</span>(<span class="cm-variable">Variable</span>(<span class="cm-variable">torch</span>.<span class="cm-property">Tensor</span>([<span class="cm-variable">s</span>])))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">action_prob</span> = <span class="cm-variable">torch</span>.<span class="cm-property">exp</span>(<span class="cm-variable">log_prob</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">a</span> = <span class="cm-variable">np</span>.<span class="cm-property">random</span>.<span class="cm-property">choice</span>(<span class="cm-number">2</span>, <span class="cm-variable">p</span>=<span class="cm-variable">action_prob</span>.<span class="cm-property">cpu</span>().<span class="cm-property">data</span>.<span class="cm-property">numpy</span>()[<span class="cm-number">0</span>])</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">s_</span>, <span class="cm-variable">r</span>, <span class="cm-variable">done</span>, <span class="cm-variable">_</span> = <span class="cm-variable">env</span>.<span class="cm-property">step</span>(<span class="cm-variable">a</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">if</span> <span class="cm-variable">done</span>:</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">r</span> = <span class="cm-operator">-</span><span class="cm-number">20</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">one_hot_action</span> = [<span class="cm-builtin">int</span>(<span class="cm-variable">k</span> == <span class="cm-variable">a</span>) <span class="cm-keyword">for</span> <span class="cm-variable">k</span> <span class="cm-keyword">in</span> <span class="cm-builtin">range</span>(<span class="cm-number">2</span>)]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">epoch_action</span>.<span class="cm-property">append</span>(<span class="cm-variable">one_hot_action</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">epoch_reward</span>.<span class="cm-property">append</span>(<span class="cm-variable">r</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">epoch_state</span>.<span class="cm-property">append</span>(<span class="cm-variable">s</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">s</span> = <span class="cm-variable">s_</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">if</span> <span class="cm-variable">done</span>:</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">break</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">epoch_action</span> = <span class="cm-variable">Variable</span>(<span class="cm-variable">torch</span>.<span class="cm-property">Tensor</span>(<span class="cm-variable">epoch_action</span>).<span class="cm-property">view</span>(<span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-number">2</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">epoch_state</span> = <span class="cm-variable">Variable</span>(<span class="cm-variable">torch</span>.<span class="cm-property">Tensor</span>(<span class="cm-variable">epoch_state</span>).<span class="cm-property">view</span>(<span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-number">4</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">actor_network_optim</span>.<span class="cm-property">zero_grad</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">log_probs</span> = <span class="cm-variable">actor_network</span>(<span class="cm-variable">epoch_state</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">value_value</span> = <span class="cm-variable">value_network</span>(<span class="cm-variable">epoch_state</span>).<span class="cm-property">detach</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">running_reward</span> = <span class="cm-variable">np</span>.<span class="cm-property">zeros_like</span>(<span class="cm-variable">epoch_reward</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">running_add</span> = <span class="cm-variable">value_network</span>(<span class="cm-variable">Variable</span>(<span class="cm-variable">torch</span>.<span class="cm-property">Tensor</span>([<span class="cm-variable">s</span>]))).<span class="cm-property">cpu</span>().<span class="cm-property">data</span>.<span class="cm-property">numpy</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-builtin">reversed</span>(<span class="cm-builtin">range</span>(<span class="cm-number">0</span>, <span class="cm-builtin">len</span>(<span class="cm-variable">epoch_reward</span>))):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">running_add</span> = <span class="cm-variable">running_add</span> <span class="cm-operator">*</span> <span class="cm-number">0.99</span> <span class="cm-operator">+</span> <span class="cm-variable">epoch_reward</span>[<span class="cm-variable">i</span>]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">running_reward</span>[<span class="cm-variable">i</span>] = <span class="cm-variable">running_add</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">target_value</span> = <span class="cm-variable">Variable</span>(<span class="cm-variable">torch</span>.<span class="cm-property">Tensor</span>(<span class="cm-variable">running_reward</span>))</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">advantages</span> = <span class="cm-variable">target_value</span> <span class="cm-operator">-</span> <span class="cm-variable">value_value</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">actor_network_loss</span> = <span class="cm-operator">-</span> <span class="cm-variable">torch</span>.<span class="cm-property">mean</span>(<span class="cm-variable">torch</span>.<span class="cm-property">sum</span>(<span class="cm-variable">log_probs</span><span class="cm-operator">*</span><span class="cm-variable">epoch_action</span>, <span class="cm-number">1</span>) <span class="cm-operator">*</span> <span class="cm-variable">advantages</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">actor_network_loss</span>.<span class="cm-property">backward</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">torch</span>.<span class="cm-property">nn</span>.<span class="cm-property">utils</span>.<span class="cm-property">clip_grad_norm</span>(<span class="cm-variable">actor_network</span>.<span class="cm-property">parameters</span>(), <span class="cm-number">0.5</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">actor_network_optim</span>.<span class="cm-property">step</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">value_network_optim</span>.<span class="cm-property">zero_grad</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">value</span> = <span class="cm-variable">value_network</span>(<span class="cm-variable">epoch_state</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">criterion</span> = <span class="cm-variable">nn</span>.<span class="cm-property">MSELoss</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">value_network_loss</span> = <span class="cm-variable">criterion</span>(<span class="cm-variable">value</span>.<span class="cm-property">reshape</span>([<span class="cm-builtin">len</span>(<span class="cm-variable">target_value</span>)]), <span class="cm-variable">target_value</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">value_network_loss</span>.<span class="cm-property">backward</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">torch</span>.<span class="cm-property">nn</span>.<span class="cm-property">utils</span>.<span class="cm-property">clip_grad_norm</span>(<span class="cm-variable">value_network</span>.<span class="cm-property">parameters</span>(), <span class="cm-number">0.5</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">value_network_optim</span>.<span class="cm-property">step</span>()</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># epoch_reward_sum = sum(epoch_reward)</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># if first_time:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># &nbsp; &nbsp; temp = epoch_reward_sum</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># else:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># &nbsp; &nbsp; temp = temp * 0.95 + epoch_reward_sum * 0.05</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># print("episode:", epoch, "  reward:", int(temp))</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># if temp &gt; 1000:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># &nbsp; &nbsp; render = True</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment"># first_time = False</span></span></pre><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 3100px;"></div><div class="CodeMirror-gutters" style="display: none; height: 3100px;"></div></div></div></pre><p>&nbsp;</p></div></div>
+
+        </div>
+
+        <div class="span_right">
+
+            <div class="right_description">
+                本页用作在展示页面中嵌入代码的尝试，代码为a2c算法，仅用作测试。
+            </div>
+
+            <div class="right_block1">
+
+                <div class="block1"></div>
+
+                <div class="right_title1">
+                    Category
+                </div>
+
+                <div class="right_list1">
+                    <ul>
+                        <li><a href="../../category/ir.html">Intelligence Related</a></li>
+                        <li><a href="../../category/co.html">Cogitations</a></li>
+                        <li><a href="../../category/ml.html">Machine Learning</a></li>
+                        <li><a href="../../category/dl.html">Deep Learning</a></li>
+                        <li><a href="../../category/rl.html">Reinforcement Learning</a></li>
+                        <li><a href="../../category/wp.html">Conception</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right_block2">
+
+                <div class="block2"></div>
+
+                <div class="right_title2">
+                    Links
+                </div>
+
+                <div class="right_list2">
+                    <ul>
+                    	 <li><a href="../../index.html">Homepage</a></li>
+                         <li><a href="profile.html">Sinyer's Profile</a></li>
+                         <li><a href="https://github.com/sinyeratlantis">Sinyer's Github</a></li>
+                         <li><a href="https://www.zhihu.com/people/sinyeratlantis">Sinyer's Zhihu</a></li>
+                         <li><a href="https://twitter.com/sinyeratlantis">Sinyer's Twitter</a></li>
+                    </ul>
+                </div>
+            </div>   
+        </div>
+    </div>
+
+    <div style="clear: left"></div>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="foot">
+        <footer>
+            <p>Copyright &copy; 2018-2019 Sinyer. All rights reserved.</p>
+        </footer>
+    </div>
+    <br/>
+    <script type="text/javascript" src="//js.users.51.la/19821873.js"></script>
+</body>
+<script type="text/javascript">
+    function menu_in(){
+        var temp = document.getElementById('navbar_menu');
+        temp.style.display = "block";
+    }
+    function menu_out(){
+        var temp = document.getElementById('navbar_menu');
+        temp.style.display = "none";
+    }
+    function list_in() {
+        var temp = document.getElementById('navbar_menu');
+        temp.style.display = "block";
+    }
+    function list_out(){
+        var temp = document.getElementById('navbar_menu');
+        temp.style.display = "none";
+    }
+</script>    
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
