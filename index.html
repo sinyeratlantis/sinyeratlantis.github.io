@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <title>Sinyer's blog</title>
+
+    <title>Sinyer Atlantis</title>
 
     <link rel="icon" href="pic/smile.png" type="image/x-icon" />
     <link rel="shortcut icon" href="pic/smile.png" type="image/x-icon" />
@@ -11,75 +13,78 @@
     <meta name="author" content="Sinyer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-    <link href="css/style_r.css" rel="stylesheet">
+    <link href="css/style.css " rel="stylesheet">
 </head>
-<body>
 
-    <div class="container">
-        <div class="navbar">
-            <div class="navbar_name">Sinyer's blog</div>
-            <div class="navbar_icon">
-                <img src="pic/smile_r.png">
+<body>
+    <div class="navbar_background">  <!-- 导航栏背景颜色 -->
+        <div class="navbar">  <!-- 导航栏正文 -->
+            <div class="navbar_name">
+                Sinyer Atlantis
             </div>
-            <div class="navbar_list">
+            <div class="navbar_icon_img">
+                <img src="pic/smile.png">
+            </div>
+            <div class="navbar_index_list">
                  <ul>
                      <li><a href="index.html">Home</a></li>
-                     <li><a href="profile.html">Profile</a></li>
-                     <li><a href="index.html" onmouseover="menu_in()" onmouseout="menu_out()">Category</a></li>
-                     <li><a href="category/conception.html">Conception</a></li>
+                     <li><a href="index.html">Background</a></li>
+                     <li><a id="keep_color" href="index.html" onmouseover="menu_in()" onmouseout="menu_out()">Category</a></li>
+                     <li><a href="index.html">Environment</a></li>
                  </ul>
             </div>
         </div>
     </div>
-    
-    <div class="stack">
-        <div class="background">
-            <img src="pic/bg1.jpg">
-        </div>
 
-        <div class="icon">
-            <img src="pic/icon1_r.png">
-        </div>
+    <div class="background">  <!-- 背景图 -->
+        <img src="pic/bg1.jpg">
     </div>
-    
-    <div class="navbar_menu_location">
-        <div id="navbar_menu" class="navbar_menu" onmouseover="list_in()" onmouseout="list_out()">
+
+    <div class="icon">  <!-- 标志图 -->
+        <img src="pic/icon1.png">
+    </div>
+
+    <!-- category的下拉菜单，id用于给JavaScript提供索引，为避免被背景图覆盖置于其后 -->
+    <div class="navbar_category_locate_helper">
+        <div id="navbar_category" class="navbar_category" onmouseover="list_in()" onmouseout="list_out()">
             <ul>
-                <li><a href="category/intelligence.html">Intelligence R.</a></li>
-                <li><a href="category/cogitation.html">Cogitations</a></li>
-                <li><a href="category/machine.html">Machine Learning</a></li>
-                <li><a href="category/deep.html">Deep Learning</a></li>
-                <li><a href="category/reinforcement.html">Reinforcement L.</a></li>
-                <li><a href="category/conception.html">Conception</a></li>
+                <li><a href="index.html">Paper Notes</a></li>
+                <li><a href="index.html">Intelligence R.</a></li>
+                <li><a href="index.html">Cogitations</a></li>
+                <li><a href="index.html">Reinforcement L.</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="split"></div>
+    <div class="split_locate_helper"><div class="split"></div></div>  <!-- 仿Twitter的白色分隔栏，用于下拉空出距离给图片 -->
 
-    <div class="content">
+    <div class="content">  <!-- —————— 内容区块 —————— -->
 
-        <div class="span_left">
-            <div class="padding_left"></div>
-            <div class="left_name">Sinyer</div>
+        <div class="left_content">  <!-- 左内容区块 -->
+
+            <div class="left_name">
+                Sinyer
+            </div>
             
             <div class="left_description">
                 @<a href="index.html">sinyeratlantis</a>
             </div>
+
             <div class="left_description">
                 Major in machine learning, video analysis, and neural coding.
             </div>
+
             <div class="left_description">
                 Work at <a href="http://insis.bjtu.edu.cn/">INSIS</a>, BJTU.
             </div>
+
             <div class="left_description">
                 sinyeratlantis@gmail.com
             </div>
-            <br/>
             
         </div>
 
-        <div class="span_middle">
+        <div class="middle_content">
             
             <div class="middle_title">
                 Recent Writings
@@ -89,163 +94,84 @@
 
             <table class="middle_table">
                 <tr>
-                    <td class="first"><a href='content/reinforcement/PlaNet.html'>PlaNet</a></td>
-                    <td class="double" style="border-top: none">
+                    <td class="the_first_left_list"><a href='index.html'>第一列表</a></td>
+                    <td class="double_right_list" style="border-top: none">
                         <table class="double_table">
-                            <tr><td class="double_td">DeepMind近日提出的模型预测算法论文翻译</td></tr>
-                            <tr><td class="double_td">2019-2-17</td></tr>
+                            <tr><td class="double_td">描述</td></tr>
+                            <tr><td class="double_td">时间</td></tr>
                         </table>
                     </td>
                 </tr>
                 <tr>
-                    <td><a href='content/intelligence/pyautogui.html'>pyautogui的一些使用</a></td>
-                    <td class="right">2019-2-17</td>
+                    <td><a href='index.html'>简单列表</a></td>
+                    <td class="right_list">时间</td>
                 </tr>
                 <tr>
-                    <td><a href='content/cogitation/无焦虑的决策方式.html'>无焦虑的决策方式</a></td>
-                    <td class="double">
+                    <td><a href='index.html'>双层列表</a></td>
+                    <td class="double_right_list">
                         <table class="double_table">
-                            <tr><td class="double_td">平静清晰是正确决策的前提</td></tr>
-                            <tr><td class="double_td">2019-2-16</td></tr>
-                        </table>
-                    </td>
-                </tr>
-            	<tr>
-                    <td><a href='content/deep/EPIFCN.html'>EPINET：基于极线几何的全卷积网络</a></td>
-                    <td class="double">
-                        <table class="double_table">
-                            <tr><td class="double_td">Shin光场论文翻译(CVPR 2018)</td></tr>
-                            <tr><td class="double_td">2019-2-8</td></tr>
+                            <tr><td class="double_td">描述</td></tr>
+                            <tr><td class="double_td">时间</td></tr>
                         </table>
                     </td>
                 </tr>
                 <tr>
-                    <td><a href='content/reinforcement/AlphaStar.html'>AlphaStar</a></td>
-                    <td class="double">
-                        <table class="double_table">
-                            <tr><td class="double_td">DeepMind关于AlphaStar的公开博客</td></tr>
-                            <tr><td class="double_td">2019-2-5</td></tr>
-                        </table>
-                    </td>
-                </tr>
-            	<tr>
-                    <td><a href='content/reinforcement/TStarBots.html'>TStarBots</a></td>
-                    <td class="double">
-                        <table class="double_table">
-                            <tr><td class="double_td">腾讯星际2AI论文翻译</td></tr>
-                            <tr><td class="double_td">2019-2-5</td></tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href='content/deep/KalantariLF.html'>基于学习的光场相机视图合成</a></td>
-                    <td class="double">
-                        <table class="double_table">
-                            <tr><td class="double_td">Kalantari光场论文翻译</td></tr>
-                            <tr><td class="double_td">2019-1-31</td></tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href='content/cogitation/赋予个体决策力的唯一行业.html'>赋予个体决策力的唯一行业</a></td>
-                    <td class="double">
-                        <table class="double_table">
-                            <tr><td class="double_td">计算机行业本质与实力提升的关系</td></tr>
-                            <tr><td class="double_td">2018-12-28</td></tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href='content/machine/斯坦福计算机系公开课.html'>斯坦福计算机系所有课程</a></td>
-                    <td class="right">2018-12-25</td>
-                </tr>
-                <tr>
-                    <td><a href='content/cogitation/苏菲的世界哲学部分摘录.html'>《苏菲的世界》哲学部分摘录</a></td>
-                    <td class="right">按书中顺序进行的总结</td>
-                </tr>
-                <tr>
-                    <td><a href='content/deep/视频分析文献调研.html'>视频分析文献调研</a></td>
-                    <td class="right">动作分类、动作定位、视频翻译等方向</td>
-                </tr>
-                <tr>
-                    <td><a href='content/cogitation/世界文学史.html'>世界文学史</a></td>
-                    <td class="right">总结至维基与百度</td>
-                </tr>
-                <tr>
-                    <td><a href='content/reinforcement/强化学习基础.html'>强化学习基础</a></td>
-                    <td class="right">强化学习基本算法第一部分</td>
-                </tr>
-                <tr>
-                    <td><a href='../content/reinforcement/PySC2 Note.html'>PySC2 Note</a></td>
-                    <td class="right">星际争霸2强化学习项目相关</td>
-                </tr>
-                <tr>
-                    <td><a href='../content/reinforcement/PySC2实验平台性能测试文档.html'>PySC2实验平台性能测试文档</a></td>
-                    <td class="right">星际争霸2强化学习项目相关</td>
-                </tr>
-                <tr>
-                    <td><a href='../content/intelligence/神经计算前沿调研.html'>神经计算前沿调研</a></td>
-                    <td class="right">计算神经科学的论文综述</td>
-                </tr>
-                <tr>
-                    <td><a href='../content/deep/深度学习经典论文.html'>深度学习经典论文</a></td>
-                    <td class="right">小部分为深度强化学习论文</td>
+                    <td><a href='index.html'>简单列表</a></td>
+                    <td class="right_list">时间</td>
                 </tr>
             </table>
         </div>
 
-        <div class="span_right">
+        <div class="right_content">
 
             <div class="right_description">
                 Tips：本网站为Sinyer的个人网站，用于整理知识笔记、存储有保存意义的文章与感悟等，所有代码置于GitHub仓库。
             </div>
+
             <div class="right_description">
-                公告：主页暂启用暗夜模式。
+                公告：网页维护中。
             </div>
 
-            <div class="right_block1">
+            <div class="block1"></div>
 
-                <div class="block1"></div>
-
-                <div class="right_title1">
-                    Category
-                </div>
-
-                <div class="right_list1">
-                    <ul>
-                        <li><a href="category/intelligence.html">Intelligence Related</a></li>
-                        <li><a href="category/cogitation.html">Cogitations</a></li>
-                        <li><a href="category/machine.html">Machine Learning</a></li>
-                        <li><a href="category/deep.html">Deep Learning</a></li>
-                        <li><a href="category/reinforcement.html">Reinforcement Learning</a></li>
-                        <li><a href="category/conception.html">Conception</a></li>
-                    </ul>
-                </div>
+            <div class="right_title1">
+                Category
             </div>
 
-            <div class="right_block2">
+            <div class="right_list1">
+                <ul>
+                    <li><a href="index.html">Paper Notes</a></li>
+                    <li><a href="index.html">Intelligence Related</a></li>
+                    <li><a href="index.html">Cogitations</a></li>
+                    <li><a href="index.html">Reinforcement L.</a></li>
+                </ul>
+            </div>
 
-                <div class="block2"></div>
+            <div class="block2"></div>
 
-                <div class="right_title2">
-                    Links
-                </div>
+            <br/>
 
-                <div class="right_list2">
-                    <ul>
-                    	 <li><a href="index.html">Homepage</a></li>
-                         <li><a href="profile.html">Sinyer's Profile</a></li>
-                         <li><a href="https://github.com/sinyeratlantis">Sinyer's Github</a></li>
-                         <li><a href="https://www.zhihu.com/people/sinyeratlantis">Sinyer's Zhihu</a></li>
-                         <li><a href="https://twitter.com/sinyeratlantis">Sinyer's Twitter</a></li>
-                    </ul>
-                </div>
-            </div>   
+            <div class="right_title2">
+                Links
+            </div>
+
+            <div class="right_list2">
+                <ul>
+                     <li><a href="index.html">Homepage</a></li>
+                     <li><a href="index.html">Sinyer's Profile</a></li>
+                     <li><a href="https://github.com/sinyeratlantis">Sinyer's Github</a></li>
+                     <li><a href="https://www.zhihu.com/people/sinyeratlantis">Sinyer's Zhihu</a></li>
+                     <li><a href="https://twitter.com/sinyeratlantis">Sinyer's Twitter</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <div style="clear: left"></div>
 
+    <br/>
+    <br/>
+    <br/>
     <br/>
     <br/>
     <br/>
@@ -256,27 +182,39 @@
             <p>Copyright &copy; 2018-2019 Sinyer. All rights reserved.</p>
         </footer>
     </div>
+
     <br/>
+
     <script type="text/javascript" src="//js.users.51.la/19821873.js"></script>
 </body>
+
 <script type="text/javascript">
     function menu_in(){
-        var temp = document.getElementById('navbar_menu');
+        var temp = document.getElementById('navbar_category');
         temp.style.display = "block";
+        var keep_color = document.getElementById("keep_color");
+        keep_color.style.color = "rgb(26, 161, 240)";
     }
     function menu_out(){
-        var temp = document.getElementById('navbar_menu');
+        var temp = document.getElementById('navbar_category');
         temp.style.display = "none";
+        var keep_color = document.getElementById("keep_color");
+        keep_color.style.color = "rgb(102, 117, 127)";
     }
     function list_in() {
-        var temp = document.getElementById('navbar_menu');
+        var temp = document.getElementById('navbar_category');
         temp.style.display = "block";
+        var keep_color = document.getElementById("keep_color");
+        keep_color.style.color = "rgb(26, 161, 240)";
     }
     function list_out(){
-        var temp = document.getElementById('navbar_menu');
+        var temp = document.getElementById('navbar_category');
         temp.style.display = "none";
+        var keep_color = document.getElementById("keep_color");
+        keep_color.style.color = "rgb(102, 117, 127)";
     }
-</script>    
+</script>
+
 </html>
 
 

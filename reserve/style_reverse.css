@@ -8,7 +8,7 @@
 body{  /* 页面整体的一些定义 */
     width: 100%;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-    background-color: snow;
+    background-color: rgb(0, 5, 5);
     font-family: sans-serif;
     line-height: 24px;
     min-width: 1280px;}
@@ -18,7 +18,7 @@ body{  /* 页面整体的一些定义 */
 .navbar_background{
     height: 45px;
     width: 100%;  /* 宽度相关尽量用百分比 */
-    background-color: rgb(250, 250, 245);}
+    background-color: rgb(5, 5, 15);}
 
 .navbar{
     width: 80%;  /* 导航栏两边留空 */
@@ -29,8 +29,8 @@ body{  /* 页面整体的一些定义 */
     padding-left: 3%;
     font-family: "Times New Roman";
     font-size: 26px;
-    color: rgb(204, 108, 89);
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    color: rgb(51, 147, 166);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
     float: left;}
 
 .navbar_icon_img img{
@@ -50,14 +50,14 @@ body{  /* 页面整体的一些定义 */
 
 .navbar_index_list a:link{
     font-weight: bold;
-    color: rgb(102, 117, 127);
+    color: rgb(153, 138, 128);
     text-align: center;
     padding: 16px;
     text-decoration: none;}
 
 .navbar_index_list a:visited{
     font-weight: bold;
-    color: rgb(102,117,127);
+    color: rgb(153, 138, 128);
     text-align: center;
     padding: 16px;
     text-decoration: none;}
@@ -74,9 +74,9 @@ body{  /* 页面整体的一些定义 */
     margin-top: -6px;
     width: 180px;
     height: 140px;
-    background-color: rgb(250, 250, 245);
+    background-color: rgb(5, 5, 15);
     border-radius: 8px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
     float: left;
     position: absolute;}  /* abs不占页面空间，直接在页面定位显示 */
 
@@ -117,7 +117,7 @@ body{  /* 页面整体的一些定义 */
 
 .background img{
     width: 100%;  /* 图片宽度需明确定义 */
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
     position: absolute;}
 
 .icon{
@@ -131,17 +131,17 @@ body{  /* 页面整体的一些定义 */
     display: inline;
     width: 200px;
     height: 200px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
     position: absolute;}
 
 /* ————————————— split bar ————————————— */
 
 .split{  /* 下拉分隔 */
-    background-color: white;
+    background-color: black;
     width: 100%;
     height: 30px;
     margin-top: 51%;  /* 随分辨率变动位置 */
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);}
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);}
 
 /* ————————— content and left ——————————— */
 
@@ -153,11 +153,11 @@ body{  /* 页面整体的一些定义 */
     padding-top: 90px;}  /* 由于图片大小固定，故该距离为px */
 
 .left_content a:link{  /* 左部内部链接灰色 */
-    color: rgb(102, 117, 127);
+    color: rgb(153, 138, 128);
     text-decoration: none;}
 
 .left_content a:visited{  /* 点选不变 */
-    color: rgb(102, 117, 127);
+    color: rgb(153, 138, 128);
     text-decoration: none;}
 
 .left_content a:hover{  /* 放置出现下划线 */
@@ -169,13 +169,13 @@ body{  /* 页面整体的一些定义 */
     font-weight: bold;
     padding-left: 10px;
     padding-bottom: 4px;
-    color: black;}
+    color: white;}
 
 .left_description{
     padding-left: 8px;
     padding-bottom: 8px;  /* 名字区与描述区分隔 */
     font-size: 14px;
-    color: rgb(102, 117, 127);}
+    color: rgb(153, 138, 128);}
 
 /* ————————— content middle ————————— */
 
@@ -188,28 +188,28 @@ body{  /* 页面整体的一些定义 */
     padding-top: 30px;
     padding-left: 4%;
     font-size: 30px;
-    color: rgb(102, 117, 127);}
+    color: rgb(153, 138, 128);}
 
 .middle_table{
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
+    background-color: black;
     border-radius: 16px;
-    box-shadow: 0 0 2px rgba(245, 226, 189, 1);}
+    box-shadow: 0 0 2px rgba(10, 29, 66, 1);}
 
 .middle_table td{
     font-size: 16px;
     padding: 18px 18px 18px 24px;
     text-align: left;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);}
+    border-top: 1px solid rgba(255, 255, 255, 0.1);}
 
 .middle_table a:link{
     font-weight: bold;
-    color: rgb(42, 57, 87);
+    color: rgb(213, 198, 168);
     text-decoration: none;}
 
 .middle_table a:visited{
-    color: rgb(42, 57, 87);
+    color: rgb(213, 198, 168);
     text-decoration: none;}
 
 .middle_table a:hover{color: rgb(80, 124, 168);}
@@ -224,12 +224,12 @@ body{  /* 页面整体的一些定义 */
     font-size: 12px;
     padding: 18px 18px 18px 20px;
     text-align: right;
-    color: rgb(102, 117, 127);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);}
+    color: rgb(153, 138, 128);
+    border-top: 1px solid rgba(255,255,255,0.1);}
 
 .middle_table .double_right_list{  /* 双层右侧总栏 */
     padding: 0 18px 0 0;  /* 0的padding能压缩距离，机理暂未知 */
-    border-top: 1px solid rgba(0, 0, 0, 0.1);}
+    border-top: 1px solid rgba(255, 255, 255, 0.1);}
 
 .middle_table .double_table{
     width: 100%;
@@ -239,7 +239,7 @@ body{  /* 页面整体的一些定义 */
     font-size: 12px;
     padding: 0;  /* 0的padding能压缩距离，机理暂未知 */
     text-align: right;
-    color: rgb(102, 117, 127);
+    color: rgb(153, 138, 128);
     border-top: none;}
 
 /* ——————————— content right ——————————— */
@@ -255,44 +255,44 @@ body{  /* 页面整体的一些定义 */
     padding: 10px;  /* 文字与框留出间隙 */
     margin-top: 20px;  /* padding增加框内距离，margin增加框外距离 */
     font-size: 14px;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: black;
     border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);}
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.1);}
 
 .block1{  /* 直接作为背景 */
     width: 100%;
     padding: 10px;  /* 与描述框大小一致 */
     margin-top: 20px;
     height: 160px;
-    background-color: rgb(250, 250, 250);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgb(5, 5, 5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 18px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);}
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.1);}
 
 .block2{
     width: 100%;
     padding: 10px;
     margin-top: 160px;
     height: 200px;
-    background-color: rgb(250, 250, 250);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgb(5, 5, 5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 18px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);}
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.1);}
 
 .right_title1{  /* 文字作为绝对位置加上 */
     margin-left: 20%;
     margin-top: -170px;
     font-size: 16px;
-    color: rgb(102, 117, 127);
+    color: rgb(153, 138, 128);
     position: absolute;}
 
 .right_title2{
     margin-left: 20%;
     margin-top: -230px;
     font-size: 16px;
-    color: rgb(102, 117, 127);
+    color: rgb(153, 138, 128);
     position: absolute;}
 
 .right_list1{
@@ -307,7 +307,7 @@ body{  /* 页面整体的一些定义 */
 
 .right_list1 li{
     padding: 4px 4px 4px 8px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 14px;}
 
 .right_list1 a:link{
@@ -334,7 +334,7 @@ body{  /* 页面整体的一些定义 */
 
 .right_list2 li{
     padding: 4px 4px 4px 16px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255,255,255,0.1);
     font-size: 14px;}
 
 .right_list2 a:link{
