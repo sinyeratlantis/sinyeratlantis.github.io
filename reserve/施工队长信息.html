@@ -1,0 +1,79 @@
+
+<!-- saved from url=(0106)http://58.30.55.60/lrns/construct_leader/enterprise/construct_leader_qrcode_message.jsp?leader_id=42337596 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK"> 
+<script language="javascript"> 
+
+var hkey_root,hkey_path,hkey_key;
+hkey_root="HKEY_CURRENT_USER";
+hkey_path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+//设置网页打印的页眉页脚为空
+function pagesetup_null(){
+try{
+	var RegWsh = new ActiveXObject("WScript.Shell");
+	hkey_key="header";
+	RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+	hkey_key="footer";
+	RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+}catch(e){}
+}
+function printContact(){
+	  PageSetup_Null();
+	  window.print();
+	}
+
+function printdiv(printpage) 
+{ 
+	var headstr = "<html><head><title></title></head><body>"; 
+	var footstr = "</body>"; 
+	var newstr = document.all.item(printpage).innerHTML; 
+	var oldstr = document.body.innerHTML; 
+	document.body.innerHTML = headstr+newstr+footstr; 
+	window.print(); 
+	document.body.innerHTML = oldstr; 
+	return false; 
+} 
+</script> 
+<style> 
+.table-a table{border:1px solid #3B3B3B} 
+/* css注释：只对table标签设置红色边框样式 */ 
+</style>
+<title>施工队长信息</title> 
+</head> 
+ 
+<body data-new-gr-c-s-check-loaded="14.1057.0" data-gr-ext-installed=""> 
+<br> 
+ 
+<div id="div_print" class="table-a"> 
+ 
+<table style="height:400px;width:500px;table-layout;" align="center">
+<tbody><tr>
+<td colspan="2" align="center" style="height:25px;font-size:40px;">施工队长聘任证书</td>
+</tr>
+<tr>
+<td style="width:500px;line-height:10px;padding-left:100px;">
+<img src="./施工队长信息_files/19.jpeg" width="150">
+</td>
+</tr>
+<tr>
+
+<td style="height:50px;width:500px;line-height:30px;font-size:20px;">
+
+姓名：谭卫国<br>
+身份证号：4323211971****1771<br>
+所属企业：广东新可宇建设集团有限公司<br>
+聘任期：从2021-04-09至2026-04-09止。<br>
+
+</td>
+
+</tr>
+
+</tbody></table>
+
+ 
+</div> 
+ 
+
+
+
+
+			</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
